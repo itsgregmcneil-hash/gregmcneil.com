@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Greg McNeil — Home</title>
   <meta name="description" content="I'm Greg McNeil, and I make cool stuff." />
+  
+  <script>
+    (function(){
+      try{
+        var t = localStorage.getItem('theme');
+        if(!t){
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      }catch(e){ /* no-op */ }
+    })();
+  </script>
+
   <link rel="stylesheet" href="./shared/header.css" />
   <link rel="preload" as="image" href="./assets/home-bg.avif" />
   <style>
@@ -12,7 +25,7 @@
       --accent:#6CBEF1;
       --text:#EEF1F5;
       --muted:#D4DCE6;
-      --content-left: 64px;
+      --content-left: 200px;
       --header-height: 96px;
       --zoom-scale: 1;
     }
@@ -47,8 +60,85 @@
     .social a{display:inline-flex; width:50px; height:50px}
     .social img{width:100%; height:100%; object-fit:contain}
     .social a:hover img{filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
+    /* Home-specific: respect system theme for background (behind image) and burger */
+    .hero{ background: var(--canvas) !important; }
+    /* Keep the hero image and overlays visible for full-bleed effect */
+    /* Ensure hamburger uses theme ink on home */
+    .menu-toggle::before{
+      background: var(--ink) !important;
+      box-shadow: 0 6px 0 0 var(--ink), 0 12px 0 0 var(--ink) !important;
+    }
+
+    /* Theme-specific overlay tuning so dark mode reads dark while keeping the image full-bleed */
+    html[data-theme="dark"] .overlay-dark{
+      background:
+        radial-gradient(1200px 70% at 20% 8%, rgba(0,0,0,.42), transparent 65%),
+        linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.65) 100%);
+      mix-blend-mode:multiply;
+    }
+    html[data-theme="dark"] .overlay-blue{ opacity:.10; }
+    html[data-theme="light"] .overlay-dark{
+      background:
+        radial-gradient(1200px 70% at 20% 8%, rgba(0,0,0,.14), transparent 65%),
+        linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.28) 100%);
+    }
+    /* Ensure hero image is visible and covers */
+    .hero img.hero-img{ display:block; object-fit:cover; }
+
   
-    </style>
+    /* Fix stacking so hero image sits above background */
+    .hero img.hero-img{ display:block; object-fit:cover; z-index:0 !important; }
+    .overlay-dark{ z-index:1 !important; }
+    .overlay-blue{ z-index:2 !important; }
+
+    /* Fallback: if theme.js hasn't set data-theme yet (e.g., file:// open), honor system dark mode */
+    @media (prefers-color-scheme: dark){
+      html:not([data-theme]){
+        --ink:#EAF0F6; --muted:#B7C3D3; --canvas:#0B1220; --card:#111827; --line:#1F2A3B;
+        --button-ink:#EAF0F6; --chip-ink:#0B1220;
+      }
+      /* ensure burger is visible in this fallback */
+      html:not([data-theme]) .menu-toggle::before{
+        background:#EAF0F6; box-shadow: 0 6px 0 0 #EAF0F6, 0 12px 0 0 #EAF0F6;
+      }
+    }
+
+  
+    /* Home: ensure full-bleed image completely hides themed background (no show-through) */
+    .hero{ background: var(--canvas) !important; }
+    .hero img.hero-img{
+      display:block !important;
+      width:100% !important; height:100% !important;
+      object-fit:cover !important;
+      opacity:1 !important;
+      mix-blend-mode:normal !important;
+      z-index: 10 !important;
+    }
+    /* Disable darkening overlays so image is not dim */
+    .overlay-dark, .overlay-blue{ display:none !important; }
+
+  
+    /* Ensure home content sits above the hero image */
+    .content, .social{ position:relative; z-index:30 !important; }
+
+  
+    /* Restore original home content placement (top-left) and bring to front */
+    .content{ position:absolute !important; left:var(--content-left, 64px) !important; top:calc(var(--header-height) + 3.5vh) !important; z-index:30 !important; }
+    .social{ position:relative !important; z-index:31 !important; }
+
+    /* Ensure hamburger follows theme on Home */
+    .menu-toggle{ color: var(--ink) !important; }
+    .menu-toggle::before{ background: currentColor !important; box-shadow: 0 6px 0 0 currentColor, 0 12px 0 0 currentColor !important; }
+
+  
+    /* Keep content absolute and aligned left; JS will refine vertical position */
+    .content{ position:absolute !important; left:var(--content-left, 64px) !important; z-index:30 !important; }
+
+  
+    /* Home content placement */
+    .content{ position:absolute !important; left:var(--content-left) !important; z-index:30 !important; }
+
+  </style>
   <script src="./shared/pagefx.js" defer></script>
   <script src="./shared/theme.js" defer></script>
   <script src="./shared/nav.js" defer></script>
@@ -56,13 +146,14 @@
 <body>
   <header class="header overlay" id="site-header">
     <div class="header-inner">
-      <nav class="nav" aria-label="Primary">
+      <nav class="nav" aria-label="Primary" id="primary-nav">
         <div class="brand"><a href="./index.html"><img id="brand-icon" src="./assets/icon.avif" alt="GM icon" /></a></div>
         <a class="active" href="./index.html">Home</a>
         <a href="./about.html">About</a>
         <a href="./career.html">Career</a>
         <a href="./projects.html">Projects</a>
       </nav>
+      <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu" onclick="(function(){var b=document.body;var open=b.classList.toggle('menu-open');var btn=document.getElementById('menu-toggle');if(btn) btn.setAttribute('aria-expanded', open ? 'true':'false');})();"></button>
     </div>
   </header>
 
@@ -146,5 +237,66 @@
     window.addEventListener('resize', alignLayout);
   </script>
 
-  </body>
+  
+  <script>
+    /* hamburger js */
+    (function(){
+      var btn = document.getElementById('menu-toggle');
+      var nav = document.getElementById('primary-nav');
+      var body = document.body;
+      if(!btn || !nav) return;
+
+      function closeMenu(){
+        body.classList.remove('menu-open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+      function toggleMenu(){
+        var open = body.classList.toggle('menu-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      btn.addEventListener('click', toggleMenu);
+      nav.addEventListener('click', function(e){
+        if(e.target && e.target.tagName === 'A'){ closeMenu(); }
+      });
+      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
+      var mq = window.matchMedia('(max-width: 760px)');
+      window.addEventListener('resize', function(){ if(!mq.matches) closeMenu(); });
+    })();
+  </script>
+
+
+  <script>
+    // Align headline vertically with the brand icon center
+    (function(){
+      function alignHeadline(){
+        var icon = document.getElementById('brand-icon');
+        var content = document.getElementById('content');
+        var headline = document.querySelector('.headline');
+        if(!icon || !content || !headline) return;
+
+        // Get bounding boxes
+        var iconRect = icon.getBoundingClientRect();
+        var headlineRect = headline.getBoundingClientRect();
+
+        // Desired: center of icon aligns with center of the first headline line
+        // We'll approximate using the total headline block height (looks correct in this layout)
+        var desiredTopPx = iconRect.top + (iconRect.height - headlineRect.height)/2;
+
+        // Compute current top of content and adjust by delta
+        // Use page offset to convert viewport coords to absolute
+        var currentTopPx = content.getBoundingClientRect().top + window.scrollY;
+        var delta = desiredTopPx + window.scrollY - currentTopPx;
+
+        // Apply new absolute top value in pixels
+        var computedTop = (content.offsetTop + delta);
+        // Clamp to avoid negative top on very small screens
+        computedTop = Math.max(0, Math.round(computedTop));
+        content.style.top = computedTop + 'px';
+      }
+      window.addEventListener('load', alignHeadline);
+      window.addEventListener('resize', function(){ requestAnimationFrame(alignHeadline); });
+    })();
+  </script>
+
+</body>
 </html>

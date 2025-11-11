@@ -55,13 +55,14 @@
 <body>
 <header class="header">
 <div class="header-inner">
-<nav aria-label="Primary" class="nav">
+<nav aria-label="Primary" class="nav" id="primary-nav">
 <div class="brand"><a href="./index.html"><img alt="GM icon" src="./assets/icon.avif"/></a></div>
 <a href="./index.html">Home</a>
 <a href="./about.html">About</a>
 <a class="active" href="./career.html">Career</a>
 <a href="./projects.html">Projects</a>
 </nav>
+      <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu" onclick="(function(){var b=document.body;var open=b.classList.toggle('menu-open');var btn=document.getElementById('menu-toggle');if(btn) btn.setAttribute('aria-expanded', open ? 'true':'false');})();"></button>
 </div>
 </header>
 <div class="wrap">
@@ -188,5 +189,32 @@
 </div>
 </section>
 </div>
+
+  <script>
+    /* hamburger js */
+    (function(){
+      var btn = document.getElementById('menu-toggle');
+      var nav = document.getElementById('primary-nav');
+      var body = document.body;
+      if(!btn || !nav) return;
+
+      function closeMenu(){
+        body.classList.remove('menu-open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+      function toggleMenu(){
+        var open = body.classList.toggle('menu-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      btn.addEventListener('click', toggleMenu);
+      nav.addEventListener('click', function(e){
+        if(e.target && e.target.tagName === 'A'){ closeMenu(); }
+      });
+      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
+      var mq = window.matchMedia('(max-width: 760px)');
+      window.addEventListener('resize', function(){ if(!mq.matches) closeMenu(); });
+    })();
+  </script>
+
 </body>
 </html>

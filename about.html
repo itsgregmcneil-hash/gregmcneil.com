@@ -70,17 +70,45 @@
 <body>
 <header class="header">
 <div class="header-inner">
-<nav aria-label="Primary" class="nav">
+<nav aria-label="Primary" class="nav" id="primary-nav">
 <div class="brand"><a href="./index.html"><img alt="GM icon" src="./assets/icon.avif"/></a></div>
 <a href="./index.html">Home</a>
 <a class="active" href="./about.html">About</a>
 <a href="./career.html">Career</a>
 <a href="./projects.html">Projects</a>
 </nav>
+      <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu" onclick="(function(){var b=document.body;var open=b.classList.toggle('menu-open');var btn=document.getElementById('menu-toggle');if(btn) btn.setAttribute('aria-expanded', open ? 'true':'false');})();"></button>
 </div>
 </header>
 <div class="wrap">
 <section class="section"><h2>Hi! I’m Greg,</h2><div class="bio-card"><div class="story"><p>My earliest memories are of being fascinated by technology. I remember making short movies on an early iMac and being totally enthralled when we slowed down a clip from a point-and-shoot camera. My parents like to remind me that my favorite childhood toy was a box of wires. I’m told I used to insist on bringing my wires to daycare. Apparently the curiosity started early. That same curiosity has followed me ever since: I’ve always been obsessed with building useful things that live at the intersection of liberal arts and technology.</p><p>Over the years, that curiosity turned into a career built around connecting disciplines in engineering, design, and business. I’ve always seen creativity and systems thinking as two sides of the same coin: one gives shape to imagination, and the other gives imagination purpose. I love when an idea moves from a whiteboard sketch to something people can actually use, when a rough concept turns into a real product, prototype, or experience that makes someone’s day easier.</p><p>I’m happiest when I’m creating, whether that’s designing a new good or service, filming a video, playing music, or helping someone sharpen an idea. I enjoy contributing through mentorship, product development, and creative collaborations where ideas can grow in real time. If you’re working on something interesting, let’s talk.</p></div><div class="bio-gallery"><figure class="bio-figure"><img alt="Greg with early modular outlet project" loading="lazy" src="./assets/bio-stevens.png"/><figcaption>My first startup, Modularity. It failed spectacularly, but it was the most fun I'd ever had.</figcaption></figure><figure class="bio-figure"><img alt="Greg speaking at an event" loading="lazy" src="./assets/bio-speaking.png"/><figcaption>Got to talk about the differences between 7/11 Japan and rest of world!</figcaption></figure><figure class="bio-figure"><img alt="Greg playing drums on stage" loading="lazy" src="./assets/bio-drums.png"/><figcaption>Truly such a joyful feeling.</figcaption></figure></div></div></section><section class="section" id="ways-i-contribute"><h2>Ways I Contribute</h2><div class="impact"><span class="badge">Consulting</span><span class="badge">Speaking</span><span class="badge">Mentorship</span><span class="badge">Product Strategy Review</span><span class="badge">Portfolio Feedback</span><span class="badge">Mock Interviews</span><span class="badge">Guest Lectures</span><span class="badge">Panels</span><span class="badge">Prototyping Jams</span></div></section>
 <section class="section"><div class="foot"><a class="download" href="mailto:itsgregmcneil@gmail.com">✉ Email Me</a><div aria-label="Social links" class="social"><a href="https://www.instagram.com/itsgregmcneil/" rel="noopener" target="_blank"><img alt="Instagram" data-icon="instagram" src="./assets/InstagramBlack.png" style="width:28px;height:28px;object-fit:contain"/></a><a href="https://www.linkedin.com/in/itsgregmcneil/" rel="noopener" target="_blank"><img alt="LinkedIn" data-icon="linkedin" src="./assets/LinkedInBlack.png" style="width:28px;height:28px;object-fit:contain"/></a><a href="https://www.youtube.com/@itsgregmcneil" rel="noopener" target="_blank"><img alt="YouTube" data-icon="youtube" src="./assets/YouTubeBlack.png" style="width:28px;height:28px;object-fit:contain"/></a></div></div></section></div>
+
+  <script>
+    /* hamburger js */
+    (function(){
+      var btn = document.getElementById('menu-toggle');
+      var nav = document.getElementById('primary-nav');
+      var body = document.body;
+      if(!btn || !nav) return;
+
+      function closeMenu(){
+        body.classList.remove('menu-open');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+      function toggleMenu(){
+        var open = body.classList.toggle('menu-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      btn.addEventListener('click', toggleMenu);
+      nav.addEventListener('click', function(e){
+        if(e.target && e.target.tagName === 'A'){ closeMenu(); }
+      });
+      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
+      var mq = window.matchMedia('(max-width: 760px)');
+      window.addEventListener('resize', function(){ if(!mq.matches) closeMenu(); });
+    })();
+  </script>
+
 </body>
 </html>
