@@ -1,114 +1,480 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Bio — Greg McNeil</title>
-<link href="./shared/header.css" rel="stylesheet"/>
-<style>
-    :root{--accent:#6CBEF1; --ink:#EAF0F6; --muted:#B7C3D3; --canvas:#0B1220; --card:#111827; --line:#1F2A3B;}
-    @media (prefers-color-scheme: light){
-      :root{--ink:#101318; --muted:#4A5565; --canvas:#F7FAFE; --card:#FFFFFF; --line:#E5ECF4;}
-    }
-    body{margin:0; font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--ink); background:var(--canvas); line-height:1.55;}
-    .wrap{max-width:1000px; margin:0 auto; padding:28px 20px 80px; display:grid; gap:18px}
-    .section{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:22px}
-    .section h2{margin:0 0 12px; font-size:18px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent)}
-    .lead{color:var(--muted); margin:0 0 8px}
-    .foot{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap}
-    .download{display:inline-flex; align-items:center; gap:8px; text-decoration:none; padding:10px 12px; border-radius:12px; background:color-mix(in oklab, var(--accent) 16%, transparent); color:var(--button-ink); border:1px solid color-mix(in oklab, var(--accent) 32%, transparent); font-weight:700;}
-    .download:hover{background:color-mix(in oklab, var(--accent) 24%, transparent)}
-    .social{display:flex; align-items:center; gap:14px}
-    .social a{display:inline-flex; width:28px; height:28px}
-    .social img{width:100%; height:100%; object-fit:contain}
-  
-  .contrib-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px 14px;margin:10px 0 0 0;padding-left:18px}
-  .contrib-list li{line-height:1.4}
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <title>Bio — Greg McNeil</title>
+        <link href="./shared/header.css" rel="stylesheet" />
+        <style>
+            :root {
+                --accent: #6cbef1;
+                --ink: #eaf0f6;
+                --muted: #b7c3d3;
+                --canvas: #0b1220;
+                --card: #111827;
+                --line: #1f2a3b;
+            }
+            @media (prefers-color-scheme: light) {
+                :root {
+                    --ink: #101318;
+                    --muted: #4a5565;
+                    --canvas: #f7fafe;
+                    --card: #ffffff;
+                    --line: #e5ecf4;
+                }
+            }
+            body {
+                margin: 0;
+                font-family:
+                    ui-sans-serif,
+                    system-ui,
+                    -apple-system,
+                    Segoe UI,
+                    Roboto,
+                    Helvetica,
+                    Arial;
+                color: var(--ink);
+                background: var(--canvas);
+                line-height: 1.55;
+            }
+            .wrap {
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 28px 20px 80px;
+                display: grid;
+                gap: 18px;
+            }
+            .section {
+                background: var(--card);
+                border: 1px solid var(--line);
+                border-radius: 18px;
+                padding: 22px;
+            }
+            .section h2 {
+                margin: 0 0 12px;
+                font-size: 18px;
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+                color: var(--accent);
+            }
+            .lead {
+                color: var(--muted);
+                margin: 0 0 8px;
+            }
+            .foot {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+            .download {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                text-decoration: none;
+                padding: 10px 12px;
+                border-radius: 12px;
+                background: color-mix(in oklab, var(--accent) 16%, transparent);
+                color: var(--button-ink);
+                border: 1px solid
+                    color-mix(in oklab, var(--accent) 32%, transparent);
+                font-weight: 700;
+            }
+            .download:hover {
+                background: color-mix(in oklab, var(--accent) 24%, transparent);
+            }
+            .social {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+            }
+            .social a {
+                display: inline-flex;
+                width: 28px;
+                height: 28px;
+            }
+            .social img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
 
-  .impact{display:flex; gap:8px; flex-wrap:wrap; margin-top:6px}
-  .badge{font-size:12px; padding:6px 10px; border-radius:999px; background:color-mix(in oklab, var(--accent) 14%, transparent); border:1px solid color-mix(in oklab, var(--accent) 35%, transparent); color:var(--chip-ink)}
+            .contrib-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 8px 14px;
+                margin: 10px 0 0 0;
+                padding-left: 18px;
+            }
+            .contrib-list li {
+                line-height: 1.4;
+            }
 
-  .bio-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;align-items:start}
-  .bio-grid .photos{display:grid;gap:12px}
-  .bio-grid .photos img{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:var(--card);object-fit:cover}
-  @media (max-width:900px){ .bio-grid{grid-template-columns:1fr} }
+            .impact {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+                margin-top: 6px;
+            }
+            .badge {
+                font-size: 12px;
+                padding: 6px 10px;
+                border-radius: 999px;
+                background: color-mix(in oklab, var(--accent) 14%, transparent);
+                border: 1px solid
+                    color-mix(in oklab, var(--accent) 35%, transparent);
+                color: var(--chip-ink);
+            }
 
-.bio-grid.compact{display:grid;grid-template-columns:1fr 0.8fr;gap:16px;align-items:start}
-.bio-grid.compact .photos.small{display:grid;gap:8px}
-.bio-grid.compact .photos.small img{width:100%;max-width:240px;height:auto;border-radius:10px;border:1px solid var(--line);background:var(--card);object-fit:cover;justify-self:center}
-@media (max-width:900px){.bio-grid.compact{grid-template-columns:1fr}.bio-grid.compact .photos.small img{max-width:100%}}
+            .bio-grid {
+                display: grid;
+                grid-template-columns: 1.2fr 1fr;
+                gap: 16px;
+                align-items: start;
+            }
+            .bio-grid .photos {
+                display: grid;
+                gap: 12px;
+            }
+            .bio-grid .photos img {
+                width: 100%;
+                height: auto;
+                border-radius: 12px;
+                border: 1px solid var(--line);
+                background: var(--card);
+                object-fit: cover;
+            }
+            @media (max-width: 900px) {
+                .bio-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
 
-/* Bio media layout */
-.bio-grid.compact{display:grid;grid-template-columns:1fr 0.85fr;gap:16px;align-items:start}
-.bio-grid .photos{display:grid;gap:10px}
-.bio-grid .photos img{width:100%;max-width:220px;height:auto;border-radius:10px;border:1px solid var(--line);background:var(--card);object-fit:cover;justify-self:center}
-.float-media{float:right;width:min(38%,220px);margin:2px 0 8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card);padding:0;overflow:hidden}
-.float-media img{display:block;width:100%;height:auto}
-@media (max-width:900px){
-  .bio-grid.compact{grid-template-columns:1fr}
-  .bio-grid .photos img{max-width:100%}
-  .float-media{float:none;width:100%;margin:8px 0}
-}
+            .bio-grid.compact {
+                display: grid;
+                grid-template-columns: 1fr 0.8fr;
+                gap: 16px;
+                align-items: start;
+            }
+            .bio-grid.compact .photos.small {
+                display: grid;
+                gap: 8px;
+            }
+            .bio-grid.compact .photos.small img {
+                width: 100%;
+                max-width: 240px;
+                height: auto;
+                border-radius: 10px;
+                border: 1px solid var(--line);
+                background: var(--card);
+                object-fit: cover;
+                justify-self: center;
+            }
+            @media (max-width: 900px) {
+                .bio-grid.compact {
+                    grid-template-columns: 1fr;
+                }
+                .bio-grid.compact .photos.small img {
+                    max-width: 100%;
+                }
+            }
 
-/* Bio gallery layout */
-.bio-card{display:grid;gap:14px}
-.bio-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.bio-figure{margin:0; background:var(--card); border:1px solid var(--line); border-radius:10px; overflow:hidden; display:flex; flex-direction:column}
-.bio-figure img{width:100%; height:auto; display:block; object-fit:cover; max-height:220px}
-.bio-figure figcaption{padding:8px 10px; font-size:12px; color:var(--muted)}
-@media (max-width:900px){
-  .bio-gallery{grid-template-columns:1fr; gap:10px}
-  .bio-figure img{max-height:none}
-}
-</style>
-<script defer="" src="./shared/pagefx.js"></script>
-<script defer="" src="./shared/scrollhide.js"></script>
-<script defer="" src="./shared/theme.js"></script>
-<script defer="" src="./shared/nav.js"></script>
-</head>
-<body>
-<header class="header">
-<div class="header-inner">
-<nav aria-label="Primary" class="nav" id="primary-nav">
-<div class="brand"><a href="./index.html"><img alt="GM icon" src="./assets/icon.avif"/></a></div>
-<a href="./index.html">Home</a>
-<a class="active" href="./about.html">About</a>
-<a href="./career.html">Career</a>
-<a href="./projects.html">Projects</a>
-</nav>
-      <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu" onclick="(function(){var b=document.body;var open=b.classList.toggle('menu-open');var btn=document.getElementById('menu-toggle');if(btn) btn.setAttribute('aria-expanded', open ? 'true':'false');})();"></button>
-</div>
-</header>
-<div class="wrap">
-<section class="section"><h2>Hi! I’m Greg,</h2><div class="bio-card"><div class="story"><p>My earliest memories are of being fascinated by technology. I remember making short movies on an early iMac and being totally enthralled when we slowed down a clip from a point-and-shoot camera. My parents like to remind me that my favorite childhood toy was a box of wires. I’m told I used to insist on bringing my wires to daycare. Apparently the curiosity started early. That same curiosity has followed me ever since: I’ve always been obsessed with building useful things that live at the intersection of liberal arts and technology.</p><p>Over the years, that curiosity turned into a career built around connecting disciplines in engineering, design, and business. I’ve always seen creativity and systems thinking as two sides of the same coin: one gives shape to imagination, and the other gives imagination purpose. I love when an idea moves from a whiteboard sketch to something people can actually use, when a rough concept turns into a real product, prototype, or experience that makes someone’s day easier.</p><p>I’m happiest when I’m creating, whether that’s designing a new good or service, filming a video, playing music, or helping someone sharpen an idea. I enjoy contributing through mentorship, product development, and creative collaborations where ideas can grow in real time. If you’re working on something interesting, let’s talk.</p></div><div class="bio-gallery"><figure class="bio-figure"><img alt="Greg with early modular outlet project" loading="lazy" src="./assets/bio-stevens.png"/><figcaption>My first startup, Modularity. It failed spectacularly, but it was the most fun I'd ever had.</figcaption></figure><figure class="bio-figure"><img alt="Greg speaking at an event" loading="lazy" src="./assets/bio-speaking.png"/><figcaption>Got to talk about the differences between 7/11 Japan and rest of world!</figcaption></figure><figure class="bio-figure"><img alt="Greg playing drums on stage" loading="lazy" src="./assets/bio-drums.png"/><figcaption>Truly such a joyful feeling.</figcaption></figure></div></div></section><section class="section" id="ways-i-contribute"><h2>Ways I Contribute</h2><div class="impact"><span class="badge">Consulting</span><span class="badge">Speaking</span><span class="badge">Mentorship</span><span class="badge">Product Strategy Review</span><span class="badge">Portfolio Feedback</span><span class="badge">Mock Interviews</span><span class="badge">Guest Lectures</span><span class="badge">Panels</span><span class="badge">Prototyping Jams</span></div></section>
-<section class="section"><div class="foot"><a class="download" href="mailto:itsgregmcneil@gmail.com">✉ Email Me</a><div aria-label="Social links" class="social"><a href="https://www.instagram.com/itsgregmcneil/" rel="noopener" target="_blank"><img alt="Instagram" data-icon="instagram" src="./assets/InstagramBlack.png" style="width:28px;height:28px;object-fit:contain"/></a><a href="https://www.linkedin.com/in/itsgregmcneil/" rel="noopener" target="_blank"><img alt="LinkedIn" data-icon="linkedin" src="./assets/LinkedInBlack.png" style="width:28px;height:28px;object-fit:contain"/></a><a href="https://www.youtube.com/@itsgregmcneil" rel="noopener" target="_blank"><img alt="YouTube" data-icon="youtube" src="./assets/YouTubeBlack.png" style="width:28px;height:28px;object-fit:contain"/></a></div></div></section></div>
+            /* Bio media layout */
+            .bio-grid.compact {
+                display: grid;
+                grid-template-columns: 1fr 0.85fr;
+                gap: 16px;
+                align-items: start;
+            }
+            .bio-grid .photos {
+                display: grid;
+                gap: 10px;
+            }
+            .bio-grid .photos img {
+                width: 100%;
+                max-width: 220px;
+                height: auto;
+                border-radius: 10px;
+                border: 1px solid var(--line);
+                background: var(--card);
+                object-fit: cover;
+                justify-self: center;
+            }
+            .float-media {
+                float: right;
+                width: min(38%, 220px);
+                margin: 2px 0 8px 12px;
+                border-radius: 10px;
+                border: 1px solid var(--line);
+                background: var(--card);
+                padding: 0;
+                overflow: hidden;
+            }
+            .float-media img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+            @media (max-width: 900px) {
+                .bio-grid.compact {
+                    grid-template-columns: 1fr;
+                }
+                .bio-grid .photos img {
+                    max-width: 100%;
+                }
+                .float-media {
+                    float: none;
+                    width: 100%;
+                    margin: 8px 0;
+                }
+            }
 
-  <script>
-    /* hamburger js */
-    (function(){
-      var btn = document.getElementById('menu-toggle');
-      var nav = document.getElementById('primary-nav');
-      var body = document.body;
-      if(!btn || !nav) return;
+            /* Bio gallery layout */
+            .bio-card {
+                display: grid;
+                gap: 14px;
+            }
+            .bio-gallery {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+            }
+            .bio-figure {
+                margin: 0;
+                background: var(--card);
+                border: 1px solid var(--line);
+                border-radius: 10px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+            }
+            .bio-figure img {
+                width: 100%;
+                height: auto;
+                display: block;
+                object-fit: cover;
+                max-height: 220px;
+            }
+            .bio-figure figcaption {
+                padding: 8px 10px;
+                font-size: 12px;
+                color: var(--muted);
+            }
+            @media (max-width: 900px) {
+                .bio-gallery {
+                    grid-template-columns: 1fr;
+                    gap: 10px;
+                }
+                .bio-figure img {
+                    max-height: none;
+                }
+                .bio-figure {
+                    margin: 0;
+                } /* Remove any extra margin on mobile */
+            }
+        </style>
+        <script defer="" src="./shared/pagefx.js"></script>
+        <script defer="" src="./shared/scrollhide.js"></script>
+        <script defer="" src="./shared/theme.js"></script>
+    </head>
+    <body>
+        <header class="header">
+            <div class="header-inner">
+                <nav aria-label="Primary" class="nav" id="primary-nav">
+                    <div class="brand">
+                        <a href="./index.html"
+                            ><img alt="GM icon" src="./assets/icon.avif"
+                        /></a>
+                    </div>
+                    <a href="./index.html">Home</a>
+                    <a class="active" href="./about.html">About</a>
+                    <a href="./career.html">Career</a>
+                    <a href="./projects.html">Projects</a>
+                </nav>
+                <button
+                    class="menu-toggle"
+                    type="button"
+                    id="menu-toggle"
+                    aria-expanded="false"
+                    aria-controls="primary-nav"
+                    aria-label="Menu"
+                ></button>
+            </div>
+        </header>
+        <div class="wrap">
+            <section class="section">
+                <h2>Hi! I'm Greg,</h2>
+                <div class="bio-card">
+                    <div class="story">
+                        <p>
+                            My earliest memories are of being fascinated by
+                            technology. I remember making short movies on an
+                            early iMac and being totally enthralled when we
+                            slowed down a clip from a point-and-shoot camera. My
+                            parents like to remind me that my favorite childhood
+                            toy was a box of wires. I'm told I used to insist on
+                            bringing my wires to daycare. Apparently the
+                            curiosity started early. That same curiosity has
+                            followed me ever since: I've always been obsessed
+                            with building useful things that live at the
+                            intersection of liberal arts and technology.
+                        </p>
+                        <p>
+                            Over the years, that curiosity turned into a career
+                            built around connecting disciplines in engineering,
+                            design, and business. I've always seen creativity
+                            and systems thinking as two sides of the same coin:
+                            one gives shape to imagination, and the other gives
+                            imagination purpose. I love when an idea moves from
+                            a whiteboard sketch to something people can actually
+                            use, when a rough concept turns into a real product,
+                            prototype, or experience that makes someone's day
+                            easier.
+                        </p>
+                        <p>
+                            I'm happiest when I'm creating, whether that's
+                            designing a new good or service, filming a video,
+                            playing music, or helping someone sharpen an idea. I
+                            enjoy contributing through mentorship, product
+                            development, and creative collaborations where ideas
+                            can grow in real time. If you're working on
+                            something interesting, let's talk.
+                        </p>
+                    </div>
+                    <div class="bio-gallery">
+                        <figure class="bio-figure">
+                            <img
+                                alt="Greg with early modular outlet project"
+                                loading="lazy"
+                                src="./assets/bio-stevens.png"
+                            />
+                            <figcaption>
+                                My first startup, Modularity. It failed
+                                spectacularly, but it was the most fun I'd ever
+                                had.
+                            </figcaption>
+                        </figure>
+                        <figure class="bio-figure">
+                            <img
+                                alt="Greg speaking at an event"
+                                loading="lazy"
+                                src="./assets/bio-speaking.png"
+                            />
+                            <figcaption>
+                                Got to talk about the differences between 7/11
+                                Japan and rest of world!
+                            </figcaption>
+                        </figure>
+                        <figure class="bio-figure">
+                            <img
+                                alt="Greg playing drums on stage"
+                                loading="lazy"
+                                src="./assets/bio-drums.png"
+                            />
+                            <figcaption>
+                                Truly such a joyful feeling.
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </section>
+            <section class="section" id="ways-i-contribute">
+                <h2>Ways I Contribute</h2>
+                <div class="impact">
+                    <span class="badge">Consulting</span
+                    ><span class="badge">Speaking</span
+                    ><span class="badge">Mentorship</span
+                    ><span class="badge">Product Strategy Review</span
+                    ><span class="badge">Portfolio Feedback</span
+                    ><span class="badge">Mock Interviews</span
+                    ><span class="badge">Guest Lectures</span
+                    ><span class="badge">Panels</span
+                    ><span class="badge">Prototyping Jams</span>
+                </div>
+            </section>
+            <section class="section">
+                <div class="foot">
+                    <a class="download" href="mailto:itsgregmcneil@gmail.com"
+                        >✉ Email Me</a
+                    >
+                    <div aria-label="Social links" class="social">
+                        <a
+                            href="https://www.instagram.com/itsgregmcneil/"
+                            rel="noopener"
+                            target="_blank"
+                            ><img
+                                alt="Instagram"
+                                data-icon="instagram"
+                                src="./assets/InstagramBlack.png"
+                                style="
+                                    width: 28px;
+                                    height: 28px;
+                                    object-fit: contain;
+                                " /></a
+                        ><a
+                            href="https://www.linkedin.com/in/itsgregmcneil/"
+                            rel="noopener"
+                            target="_blank"
+                            ><img
+                                alt="LinkedIn"
+                                data-icon="linkedin"
+                                src="./assets/LinkedInBlack.png"
+                                style="
+                                    width: 28px;
+                                    height: 28px;
+                                    object-fit: contain;
+                                " /></a
+                        ><a
+                            href="https://www.youtube.com/@itsgregmcneil"
+                            rel="noopener"
+                            target="_blank"
+                            ><img
+                                alt="YouTube"
+                                data-icon="youtube"
+                                src="./assets/YouTubeBlack.png"
+                                style="
+                                    width: 28px;
+                                    height: 28px;
+                                    object-fit: contain;
+                                "
+                        /></a>
+                    </div>
+                </div>
+            </section>
+        </div>
 
-      function closeMenu(){
-        body.classList.remove('menu-open');
-        btn.setAttribute('aria-expanded', 'false');
-      }
-      function toggleMenu(){
-        var open = body.classList.toggle('menu-open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      }
-      btn.addEventListener('click', toggleMenu);
-      nav.addEventListener('click', function(e){
-        if(e.target && e.target.tagName === 'A'){ closeMenu(); }
-      });
-      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
-      var mq = window.matchMedia('(max-width: 760px)');
-      window.addEventListener('resize', function(){ if(!mq.matches) closeMenu(); });
-    })();
-  </script>
+        <script>
+            /* hamburger js */
+            (function () {
+                var btn = document.getElementById("menu-toggle");
+                var nav = document.getElementById("primary-nav");
+                var body = document.body;
+                if (!btn || !nav) return;
 
-</body>
+                function closeMenu() {
+                    body.classList.remove("menu-open");
+                    btn.setAttribute("aria-expanded", "false");
+                }
+                function toggleMenu() {
+                    var open = body.classList.toggle("menu-open");
+                    btn.setAttribute("aria-expanded", open ? "true" : "false");
+                }
+                btn.addEventListener("click", toggleMenu);
+                nav.addEventListener("click", function (e) {
+                    if (e.target && e.target.tagName === "A") {
+                        closeMenu();
+                    }
+                });
+                document.addEventListener("keydown", function (e) {
+                    if (e.key === "Escape") closeMenu();
+                });
+                var mq = window.matchMedia("(max-width: 760px)");
+                window.addEventListener("resize", function () {
+                    if (!mq.matches) closeMenu();
+                });
+            })();
+        </script>
+    </body>
 </html>

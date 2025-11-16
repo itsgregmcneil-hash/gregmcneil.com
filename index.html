@@ -1,302 +1,326 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-fixed-icons="true">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Greg McNeil — Home</title>
-  <meta name="description" content="I'm Greg McNeil, and I make cool stuff." />
-  
-  <script>
-    (function(){
-      try{
-        var t = localStorage.getItem('theme');
-        if(!t){
-          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
-        document.documentElement.setAttribute('data-theme', t);
-      }catch(e){ /* no-op */ }
-    })();
-  </script>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Greg McNeil — Home</title>
+        <meta
+            name="description"
+            content="I'm Greg McNeil, and I make cool stuff."
+        />
 
-  <link rel="stylesheet" href="./shared/header.css" />
-  <link rel="preload" as="image" href="./assets/home-bg.avif" />
-  <style>
-    :root {
-      --accent:#6CBEF1;
-      --text:#EEF1F5;
-      --muted:#D4DCE6;
-      --content-left: 200px;
-      --header-height: 96px;
-      --zoom-scale: 1;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      color:var(--text);
-      background:var(--canvas);
-      overflow:hidden;
-    }
-    .hero{position:relative; width:100%; height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden;}
-    .hero img.hero-img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center; filter:brightness(1.0) contrast(1.0) saturate(1.04); transform:scale(var(--zoom-scale)); transform-origin:top center; z-index:-3;}
-    .overlay-dark{position:absolute; inset:0; pointer-events:none; z-index:-2; background:
-      radial-gradient(1200px 70% at 20% 8%, rgba(0,0,0,.14), transparent 65%),
-      linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.28) 100%);
-      mix-blend-mode:multiply;
-    }
-    .overlay-blue{position:absolute; inset:0; pointer-events:none; z-index:-1; background:
-      radial-gradient(1200px 80% at 30% 15%, rgba(90,160,255,.20), rgba(80,140,255,.10) 60%, transparent 75%),
-      linear-gradient(180deg, rgba(120,180,255,.12) 0%, rgba(0,0,0,0) 60%);
-      mix-blend-mode:soft-light;
-    }
-    .content{position:absolute; left:64px; top:calc(var(--header-height) + 3.5vh); text-shadow:0 1px 10px rgba(0,0,0,.28);}
-    .stack{display:inline-block; text-align:left}
-    .headline{margin:0; font-weight:800; text-transform:uppercase; font-size:clamp(32px,6vw,82px); line-height:0.94; letter-spacing:.18em;}
-    .headline .line{display:block}
-    .headline .accent{color:var(--accent)}
-    .sub{margin-top:10px; font-weight:350; font-size:clamp(14px,1.35vw,20px); color:var(--muted); letter-spacing:.22em;}
-    .social{position:relative; margin-top:34px; display:flex; align-items:center; gap:clamp(18px,2.2vw,30px); width:fit-content; will-change:transform;}
-    .social a{display:inline-flex; width:50px; height:50px}
-    .social img{width:100%; height:100%; object-fit:contain}
-    .social a:hover img{filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
-    /* Home-specific: respect system theme for background (behind image) and burger */
-    .hero{ background: var(--canvas) !important; }
-    /* Keep the hero image and overlays visible for full-bleed effect */
-    /* Ensure hamburger uses theme ink on home */
-    .menu-toggle::before{
-      background: var(--ink) !important;
-      box-shadow: 0 6px 0 0 var(--ink), 0 12px 0 0 var(--ink) !important;
-    }
+        <script>
+            (function () {
+                try {
+                    var t = localStorage.getItem("theme");
+                    if (!t) {
+                        t = window.matchMedia("(prefers-color-scheme: dark)")
+                            .matches
+                            ? "dark"
+                            : "light";
+                    }
+                    document.documentElement.setAttribute("data-theme", t);
+                } catch (e) {
+                    /* no-op */
+                }
+            })();
+        </script>
 
-    /* Theme-specific overlay tuning so dark mode reads dark while keeping the image full-bleed */
-    html[data-theme="dark"] .overlay-dark{
-      background:
-        radial-gradient(1200px 70% at 20% 8%, rgba(0,0,0,.42), transparent 65%),
-        linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.65) 100%);
-      mix-blend-mode:multiply;
-    }
-    html[data-theme="dark"] .overlay-blue{ opacity:.10; }
-    html[data-theme="light"] .overlay-dark{
-      background:
-        radial-gradient(1200px 70% at 20% 8%, rgba(0,0,0,.14), transparent 65%),
-        linear-gradient(180deg, rgba(0,0,0,.18) 0%, rgba(0,0,0,.28) 100%);
-    }
-    /* Ensure hero image is visible and covers */
-    .hero img.hero-img{ display:block; object-fit:cover; }
+        <link rel="stylesheet" href="./shared/header.css" />
+        <link rel="preload" as="image" href="./assets/home-bg.avif" />
+        <style>
+            :root {
+                --accent: #6cbef1;
+                --text: #eef1f5;
+                --muted: #d4dce6;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            html,
+            body {
+                height: 100%;
+            }
+            body {
+                margin: 0;
+                font-family:
+                    ui-sans-serif,
+                    system-ui,
+                    -apple-system,
+                    Segoe UI,
+                    Roboto,
+                    Helvetica,
+                    Arial;
+                color: var(--text);
+                background: var(--canvas);
+                overflow: hidden;
+            }
+            .hero {
+                position: relative;
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+            }
+            .hero img.hero-img {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: top center;
+                filter: brightness(1) contrast(1) saturate(1.04);
+                z-index: -3;
+            }
+            .overlay-dark {
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                z-index: -2;
+                background:
+                    radial-gradient(
+                        1200px 70% at 20% 8%,
+                        rgba(0, 0, 0, 0.14),
+                        transparent 65%
+                    ),
+                    linear-gradient(
+                        180deg,
+                        rgba(0, 0, 0, 0.18) 0%,
+                        rgba(0, 0, 0, 0.28) 100%
+                    );
+                mix-blend-mode: multiply;
+            }
+            .overlay-blue {
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+                z-index: -1;
+                background:
+                    radial-gradient(
+                        1200px 80% at 30% 15%,
+                        rgba(90, 160, 255, 0.2),
+                        rgba(80, 140, 255, 0.1) 60%,
+                        transparent 75%
+                    ),
+                    linear-gradient(
+                        180deg,
+                        rgba(120, 180, 255, 0.12) 0%,
+                        rgba(0, 0, 0, 0) 60%
+                    );
+                mix-blend-mode: soft-light;
+            }
+            .content {
+                position: absolute;
+                left: 64px;
+                top: 250px;
+                text-shadow: 0 1px 10px rgba(0, 0, 0, 0.28);
+                z-index: 10;
+            }
+            .stack {
+                display: inline-block;
+                text-align: left;
+            }
+            .headline {
+                margin: 0;
+                font-weight: 800;
+                text-transform: uppercase;
+                font-size: clamp(32px, 6vw, 82px);
+                line-height: 0.94;
+                letter-spacing: 0.18em;
+            }
+            .headline .line {
+                display: block;
+            }
+            .headline .accent {
+                color: var(--accent);
+            }
+            .sub {
+                margin-top: clamp(8px, 0.73vw, 10px);
+                font-weight: 350;
+                font-size: clamp(11px, 1.46vw, 20px);
+                color: var(--muted);
+                letter-spacing: 0.22em;
+            }
+            .social {
+                position: relative;
+                margin-top: clamp(24px, 2.49vw, 34px);
+                display: flex;
+                align-items: center;
+                gap: clamp(14px, 2.19vw, 30px);
+                width: fit-content;
+            }
+            .social a {
+                display: inline-flex;
+                width: clamp(32px, 3.65vw, 50px);
+                height: clamp(32px, 3.65vw, 50px);
+            }
+            .social img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+            .social a:hover img {
+                filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+            }
+        </style>
+        <script src="./shared/pagefx.js" defer></script>
+        <script src="./shared/theme.js" defer></script>
+    </head>
+    <body>
+        <header class="header overlay" id="site-header">
+            <div class="header-inner">
+                <nav class="nav" aria-label="Primary" id="primary-nav">
+                    <div class="brand">
+                        <a href="./index.html"
+                            ><img
+                                id="brand-icon"
+                                src="./assets/icon.avif"
+                                alt="GM icon"
+                        /></a>
+                    </div>
+                    <a class="active" href="./index.html">Home</a>
+                    <a href="./about.html">About</a>
+                    <a href="./career.html">Career</a>
+                    <a href="./projects.html">Projects</a>
+                </nav>
+                <button
+                    class="menu-toggle"
+                    type="button"
+                    id="menu-toggle"
+                    aria-expanded="false"
+                    aria-controls="primary-nav"
+                    aria-label="Menu"
+                ></button>
+            </div>
+        </header>
 
-  
-    /* Fix stacking so hero image sits above background */
-    .hero img.hero-img{ display:block; object-fit:cover; z-index:0 !important; }
-    .overlay-dark{ z-index:1 !important; }
-    .overlay-blue{ z-index:2 !important; }
+        <main class="hero" role="main" id="home">
+            <img
+                class="hero-img"
+                id="hero-img"
+                src="./assets/home-bg.avif"
+                alt="Background"
+            />
+            <div class="overlay-dark" aria-hidden="true"></div>
+            <div class="overlay-blue" aria-hidden="true"></div>
 
-    /* Fallback: if theme.js hasn't set data-theme yet (e.g., file:// open), honor system dark mode */
-    @media (prefers-color-scheme: dark){
-      html:not([data-theme]){
-        --ink:#EAF0F6; --muted:#B7C3D3; --canvas:#0B1220; --card:#111827; --line:#1F2A3B;
-        --button-ink:#EAF0F6; --chip-ink:#0B1220;
-      }
-      /* ensure burger is visible in this fallback */
-      html:not([data-theme]) .menu-toggle::before{
-        background:#EAF0F6; box-shadow: 0 6px 0 0 #EAF0F6, 0 12px 0 0 #EAF0F6;
-      }
-    }
+            <div class="content" id="content">
+                <div class="stack" id="text-stack">
+                    <h1 class="headline" id="headline">
+                        <span class="line"
+                            >I<span class="accent">'</span>M</span
+                        >
+                        <span class="line">GREG</span>
+                        <span class="line"
+                            >MCNEIL<span class="accent">,</span></span
+                        >
+                    </h1>
+                    <div class="sub" id="sub">and I make cool stuff</div>
 
-  
-    /* Home: ensure full-bleed image completely hides themed background (no show-through) */
-    .hero{ background: var(--canvas) !important; }
-    .hero img.hero-img{
-      display:block !important;
-      width:100% !important; height:100% !important;
-      object-fit:cover !important;
-      opacity:1 !important;
-      mix-blend-mode:normal !important;
-      z-index: 10 !important;
-    }
-    /* Disable darkening overlays so image is not dim */
-    .overlay-dark, .overlay-blue{ display:none !important; }
+                    <div class="social" id="social">
+                        <a
+                            href="https://www.instagram.com/itsgregmcneil/"
+                            target="_blank"
+                            rel="noopener"
+                            aria-label="Instagram"
+                        >
+                            <img
+                                src="./assets/InstagramWhite.webp"
+                                alt="Instagram"
+                            />
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/in/itsgregmcneil/"
+                            target="_blank"
+                            rel="noopener"
+                            aria-label="LinkedIn"
+                        >
+                            <img
+                                src="./assets/LinkedInWhite.webp"
+                                alt="LinkedIn"
+                            />
+                        </a>
+                        <a
+                            href="https://www.youtube.com/@itsgregmcneil"
+                            target="_blank"
+                            rel="noopener"
+                            aria-label="YouTube"
+                        >
+                            <img
+                                src="./assets/YouTubeWhite.webp"
+                                alt="YouTube"
+                            />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
 
-  
-    /* Ensure home content sits above the hero image */
-    .content, .social{ position:relative; z-index:30 !important; }
+        <script>
+            // Simple alignment with icon
+            function alignLayout() {
+                const icon = document.getElementById("brand-icon");
+                const content = document.getElementById("content");
+                const headline = document.querySelector(".headline");
 
-  
-    /* Restore original home content placement (top-left) and bring to front */
-    .content{ position:absolute !important; left:var(--content-left, 64px) !important; top:calc(var(--header-height) + 3.5vh) !important; z-index:30 !important; }
-    .social{ position:relative !important; z-index:31 !important; }
+                if (!icon || !content || !headline) return;
 
-    /* Ensure hamburger follows theme on Home */
-    .menu-toggle{ color: var(--ink) !important; }
-    .menu-toggle::before{ background: currentColor !important; box-shadow: 0 6px 0 0 currentColor, 0 12px 0 0 currentColor !important; }
+                const iconRect = icon.getBoundingClientRect();
+                const headlineRect = headline.getBoundingClientRect();
 
-  
-    /* Keep content absolute and aligned left; JS will refine vertical position */
-    .content{ position:absolute !important; left:var(--content-left, 64px) !important; z-index:30 !important; }
+                // Align left edge with icon
+                content.style.left = iconRect.left + "px";
 
-  
-    /* Home content placement */
-    .content{ position:absolute !important; left:var(--content-left) !important; z-index:30 !important; }
+                // Vertically center headline with icon center, plus offset down
+                const iconCenterY = iconRect.top + iconRect.height / 2;
+                const headlineCenterY = headlineRect.height / 2;
+                const desiredTop = iconCenterY - headlineCenterY + 60; // Move down 60px from center
 
-  </style>
-  <script src="./shared/pagefx.js" defer></script>
-  <script src="./shared/theme.js" defer></script>
-  <script src="./shared/nav.js" defer></script>
-</head>
-<body>
-  <header class="header overlay" id="site-header">
-    <div class="header-inner">
-      <nav class="nav" aria-label="Primary" id="primary-nav">
-        <div class="brand"><a href="./index.html"><img id="brand-icon" src="./assets/icon.avif" alt="GM icon" /></a></div>
-        <a class="active" href="./index.html">Home</a>
-        <a href="./about.html">About</a>
-        <a href="./career.html">Career</a>
-        <a href="./projects.html">Projects</a>
-      </nav>
-      <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu" onclick="(function(){var b=document.body;var open=b.classList.toggle('menu-open');var btn=document.getElementById('menu-toggle');if(btn) btn.setAttribute('aria-expanded', open ? 'true':'false');})();"></button>
-    </div>
-  </header>
+                content.style.top = Math.max(140, desiredTop) + "px";
+            }
 
-  <main class="hero" role="main" id="home">
-    <img class="hero-img" id="hero-img" src="./assets/home-bg.avif" alt="Background"/>
-    <div class="overlay-dark" aria-hidden="true"></div>
-    <div class="overlay-blue" aria-hidden="true"></div>
+            window.addEventListener("load", alignLayout);
+            window.addEventListener("resize", alignLayout);
+        </script>
 
-    <div class="content" id="content">
-      <div class="stack" id="text-stack">
-        <h1 class="headline" id="headline" class="headline">
-          <span class="line">I<span class="accent">’</span>M</span>
-          <span class="line">GREG</span>
-          <span class="line">MCNEIL<span class="accent">,</span></span>
-        </h1>
-        <div class="sub" id="sub" class="sub">and I make cool stuff</div>
+        <script>
+            // Hamburger menu for index page
+            document.addEventListener("DOMContentLoaded", function () {
+                var btn = document.getElementById("menu-toggle");
+                if (btn) {
+                    btn.addEventListener("click", function () {
+                        var isOpen =
+                            document.body.classList.toggle("menu-open");
+                        btn.setAttribute(
+                            "aria-expanded",
+                            isOpen ? "true" : "false",
+                        );
+                    });
+                }
 
-        <div class="social" id="social" class="social">
-          <a href="https://www.instagram.com/itsgregmcneil/" target="_blank" rel="noopener" aria-label="Instagram">
-            <img src="./assets/InstagramWhite.webp" alt="Instagram"/>
-          </a>
-          <a href="https://www.linkedin.com/in/itsgregmcneil/" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <img src="./assets/LinkedInWhite.webp" alt="LinkedIn"/>
-          </a>
-          <a href="https://www.youtube.com/@itsgregmcneil" target="_blank" rel="noopener" aria-label="YouTube">
-            <img src="./assets/YouTubeWhite.webp" alt="YouTube"/>
-          </a>
-        </div>
-      </div>
-    </div>
-  </main>
+                // Close menu on link click or escape
+                document.addEventListener("click", function (e) {
+                    if (
+                        e.target.closest(".nav a") &&
+                        document.body.classList.contains("menu-open")
+                    ) {
+                        document.body.classList.remove("menu-open");
+                        if (btn) btn.setAttribute("aria-expanded", "false");
+                    }
+                });
 
-  <script>
-    // Keep alignment behavior from v17
-    let baseFontSize = null;
-    function computeZoomScale(){
-      const test = document.createElement('div');
-      test.style.position='absolute';
-      test.style.visibility='hidden';
-      test.style.fontSize='16px';
-      test.textContent='M';
-      document.body.appendChild(test);
-      const px = parseFloat(getComputedStyle(test).fontSize);
-      document.body.removeChild(test);
-      if(baseFontSize === null){ baseFontSize = px; return 1; }
-      return px / baseFontSize;
-    }
-
-    function alignLayout(){
-      const icon = document.getElementById('brand-icon');
-      const header = document.getElementById('site-header');
-      const content = document.getElementById('content');
-      const social = document.getElementById('social');
-
-      const z = computeZoomScale();
-      document.documentElement.style.setProperty('--zoom-scale', z.toString());
-
-      if(icon && header){
-        const iconRect = icon.getBoundingClientRect();
-        const headerRect = header.getBoundingClientRect();
-        const left = Math.max(16, iconRect.left);
-        document.documentElement.style.setProperty('--header-height', headerRect.height + 'px');
-        content.style.left = left + 'px';
-        const naturalTop = headerRect.bottom + window.innerHeight * 0.035;
-        const distance = naturalTop - iconRect.bottom;
-        const newTop = naturalTop - distance * 0.10;
-        content.style.top = newTop + 'px';
-      }
-      if(content && social){
-        const first = social.querySelector('a');
-        if(first){
-          social.style.transform = 'translateX(0px)';
-          const contentLeft = content.getBoundingClientRect().left + 12;
-          const firstLeft = first.getBoundingClientRect().left;
-          const delta = contentLeft - firstLeft;
-          social.style.transform = 'translateX(' + delta + 'px)';
-        }
-      }
-    }
-    window.addEventListener('load', alignLayout);
-    window.addEventListener('resize', alignLayout);
-  </script>
-
-  
-  <script>
-    /* hamburger js */
-    (function(){
-      var btn = document.getElementById('menu-toggle');
-      var nav = document.getElementById('primary-nav');
-      var body = document.body;
-      if(!btn || !nav) return;
-
-      function closeMenu(){
-        body.classList.remove('menu-open');
-        btn.setAttribute('aria-expanded', 'false');
-      }
-      function toggleMenu(){
-        var open = body.classList.toggle('menu-open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      }
-      btn.addEventListener('click', toggleMenu);
-      nav.addEventListener('click', function(e){
-        if(e.target && e.target.tagName === 'A'){ closeMenu(); }
-      });
-      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
-      var mq = window.matchMedia('(max-width: 760px)');
-      window.addEventListener('resize', function(){ if(!mq.matches) closeMenu(); });
-    })();
-  </script>
-
-
-  <script>
-    // Align headline vertically with the brand icon center
-    (function(){
-      function alignHeadline(){
-        var icon = document.getElementById('brand-icon');
-        var content = document.getElementById('content');
-        var headline = document.querySelector('.headline');
-        if(!icon || !content || !headline) return;
-
-        // Get bounding boxes
-        var iconRect = icon.getBoundingClientRect();
-        var headlineRect = headline.getBoundingClientRect();
-
-        // Desired: center of icon aligns with center of the first headline line
-        // We'll approximate using the total headline block height (looks correct in this layout)
-        var desiredTopPx = iconRect.top + (iconRect.height - headlineRect.height)/2;
-
-        // Compute current top of content and adjust by delta
-        // Use page offset to convert viewport coords to absolute
-        var currentTopPx = content.getBoundingClientRect().top + window.scrollY;
-        var delta = desiredTopPx + window.scrollY - currentTopPx;
-
-        // Apply new absolute top value in pixels
-        var computedTop = (content.offsetTop + delta);
-        // Clamp to avoid negative top on very small screens
-        computedTop = Math.max(0, Math.round(computedTop));
-        content.style.top = computedTop + 'px';
-      }
-      window.addEventListener('load', alignHeadline);
-      window.addEventListener('resize', function(){ requestAnimationFrame(alignHeadline); });
-    })();
-  </script>
-
-</body>
+                document.addEventListener("keydown", function (e) {
+                    if (
+                        e.key === "Escape" &&
+                        document.body.classList.contains("menu-open")
+                    ) {
+                        document.body.classList.remove("menu-open");
+                        if (btn) btn.setAttribute("aria-expanded", "false");
+                    }
+                });
+            });
+        </script>
+    </body>
 </html>

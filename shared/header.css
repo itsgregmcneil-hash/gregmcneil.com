@@ -1,233 +1,305 @@
-/* Shared header: pixel-identical across pages (v19) */
-:root{
-  --accent:#6CBEF1;
+/* Shared header: pixel-identical across pages */
+:root {
+    --accent: #6cbef1;
 
-  /* Base (will be overridden by html[data-theme] below) */
-  --ink:#101318; 
-  --muted:#4A5565;
-  --canvas:#F7FAFE;
-  --card:#FFFFFF;
-  --line:#E5ECF4;
+    /* Base (will be overridden by html[data-theme] below) */
+    --ink: #101318;
+    --muted: #4a5565;
+    --canvas: #f7fafe;
+    --card: #ffffff;
+    --line: #e5ecf4;
 
-  /* UI helpers that should react to theme */
-  --button-ink: var(--ink);
-  --chip-ink: var(--ink);
+    /* UI helpers that should react to theme */
+    --button-ink: var(--ink);
+    --chip-ink: var(--ink);
 }
 
-.header{
-  position:sticky; top:0; left:0; right:0; z-index:20;
-  background:color-mix(in oklab, var(--canvas) 85%, transparent);
-  border-bottom:1px solid color-mix(in oklab, var(--line) 70%, transparent);
-  backdrop-filter:saturate(120%) blur(10px);
-  transition: transform .24s ease; will-change: transform;
+.header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    background: color-mix(in oklab, var(--canvas) 85%, transparent);
+    border-bottom: 1px solid color-mix(in oklab, var(--line) 70%, transparent);
+    backdrop-filter: saturate(120%) blur(10px);
+    transition: transform 0.24s ease;
 }
-.header-inner{
-  max-width:1200px; margin:0 auto; padding:16px 24px;
-  display:flex; justify-content:center; align-items:center;
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
-.nav{
-  display:flex; align-items:center;
-  gap:clamp(68px,9.7vw,194px);
-  font-family:"Helvetica Neue", Helvetica, Arial, ui-sans-serif, system-ui, -apple-system;
+.nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(68px, 9.7vw, 194px);
+    font-family:
+        "Helvetica Neue",
+        Helvetica,
+        Arial,
+        ui-sans-serif,
+        system-ui,
+        -apple-system;
 }
-.brand img{width:68px; height:68px; object-fit:contain}
-.nav a{
-  color:var(--ink); text-decoration:none; opacity:.95;
-  font-weight:400; letter-spacing:.08em;
-  font-size:clamp(17px,1.38vw,21px);
-  transition:color .2s ease, opacity .2s ease;
+.brand img {
+    width: 68px;
+    height: 68px;
+    object-fit: contain;
 }
-.nav a:hover{color:var(--accent); opacity:1}
-.nav a.active{color:var(--accent)}
+.nav a {
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.95;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    font-size: clamp(17px, 1.38vw, 21px);
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+.nav a:hover {
+    color: var(--accent);
+    opacity: 1;
+}
+.nav a.active {
+    color: var(--accent);
+}
 
-
-/* --- Overlay variant (for the home hero) --- */
-.header.overlay{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
-  background: transparent;
-  border-bottom: none;
-  backdrop-filter: none;
+/* --- Index page: fixed positioning + transparent background + white text --- */
+.header.overlay {
+    position: fixed;
+    background: transparent;
+    border-bottom: none;
+    backdrop-filter: none;
+    z-index: 100; /* Ensure header is above all content */
 }
 .header.overlay .nav a {
-  color: #FFFFFF;
-  opacity: 0.98;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    color: #ffffff;
+    opacity: 0.98;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 .header.overlay .nav a:hover,
 .header.overlay .nav a.active {
-  color: var(--accent);
-  opacity: 1;
+    color: var(--accent);
+    opacity: 1;
 }
-
 
 /* Page fade transitions */
-body.fade-init{opacity:0}
-body.fade-in{opacity:1; transition:opacity .24s ease}
-body.fade-out{opacity:0; transition:opacity .24s ease}
-
+body.fade-init {
+    opacity: 0;
+}
+body.fade-in {
+    opacity: 1;
+    transition: opacity 0.24s ease;
+}
+body.fade-out {
+    opacity: 0;
+    transition: opacity 0.24s ease;
+}
 
 /* Hide-on-scroll behavior */
-.header.hide{ transform: translateY(-110%); }
-
+.header.hide {
+    transform: translateY(-110%);
+}
 
 /* Theme overrides via data-theme */
-html[data-theme="light"] :root{
-  --ink:#101318; --muted:#4A5565; --canvas:#F7FAFE; --card:#FFFFFF; --line:#E5ECF4;
-  --button-ink:#0B1A25;   /* dark text on light accent pills */
-  --chip-ink:#0B1A25;
+html[data-theme="light"] :root {
+    --ink: #101318;
+    --muted: #4a5565;
+    --canvas: #f7fafe;
+    --card: #ffffff;
+    --line: #e5ecf4;
+    --button-ink: #0b1a25;
+    --chip-ink: #0b1a25;
 }
-html[data-theme="dark"] :root{
-  --ink:#EAF0F6; --muted:#B7C3D3; --canvas:#0B1220; --card:#111827; --line:#1F2A3B;
-  --button-ink:#EAF0F6;   /* light text on accent pills */
-  --chip-ink:#0B1220;     /* darker ink for light accent chips */
+html[data-theme="dark"] :root {
+    --ink: #eaf0f6;
+    --muted: #b7c3d3;
+    --canvas: #0b1220;
+    --card: #111827;
+    --line: #1f2a3b;
+    --button-ink: #eaf0f6;
+    --chip-ink: #0b1220;
 }
 
-/* Theme toggle button (simple text button for now) */
-.theme-toggle{
-  margin-left:auto;
-  font-size:14px;
-  padding:8px 10px;
-  border-radius:10px;
-  border:1px solid var(--line);
-  background:color-mix(in oklab, var(--card) 85%, transparent);
-  color:var(--ink);
-  cursor:pointer;
+/* Theme toggle button */
+.theme-toggle {
+    margin-left: auto;
+    font-size: 14px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: color-mix(in oklab, var(--card) 85%, transparent);
+    color: var(--ink);
+    cursor: pointer;
 }
-.theme-toggle:hover{ border-color: color-mix(in oklab, var(--accent) 50%, var(--line)); }
-
+.theme-toggle:hover {
+    border-color: color-mix(in oklab, var(--accent) 50%, var(--line));
+}
 
 /* Mobile nav (hamburger) */
-.menu-toggle{
-  display:none; margin-left:auto; width:40px; height:40px; border-radius:10px;
-  border:1px solid var(--line); background:var(--card); color:var(--ink); cursor:pointer;
+.menu-toggle {
+    display: none;
+    margin-left: auto;
+    width: 44px;
+    height: 44px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    position: relative;
 }
-.menu-toggle:before{content:"≡"; font-size:22px; line-height:38px; display:block; text-align:center}
-@media (max-width:760px){
-  .menu-toggle{display:block}
-  .nav a{display:none}
-  body.menu-open .nav > a{display:inline-flex; background:var(--card); padding:10px 12px; border-radius:8px; margin-top:8px}
-  .nav{flex-wrap:wrap; gap:12px}
+.menu-toggle::before {
+    content: "";
+    position: absolute;
+    left: 11px;
+    right: 11px;
+    top: 14px;
+    height: 2px;
+    background: var(--ink);
+    box-shadow:
+        0 6px 0 0 var(--ink),
+        0 12px 0 0 var(--ink);
+}
+.menu-toggle:focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--ink) 40%, transparent);
+    outline-offset: 2px;
 }
 
+/* Index page: hamburger always white */
+.header.overlay .menu-toggle::before {
+    background: #ffffff;
+    box-shadow:
+        0 6px 0 0 #ffffff,
+        0 12px 0 0 #ffffff;
+}
 
 /* Global page colors */
-html, body{min-height:100%}
-body{ background: var(--canvas); color: var(--ink); }
-
-
-/* header base line */
-.header{
-  border-bottom: 1px solid color-mix(in oklab, var(--line) 70%, transparent);
+html,
+body {
+    min-height: 100%;
 }
-
+body {
+    background: var(--canvas);
+    color: var(--ink);
+}
 
 /* === Responsive hamburger (<=760px) === */
-.menu-toggle{display:none}
+@media (max-width: 760px) {
+    .header-inner {
+        justify-content: space-between;
+    }
 
-@media (max-width:760px){
-  .header-inner{justify-content:space-between}
-  .menu-toggle{
-    display:inline-block;
-    position:relative;
-    width:44px; height:44px;
-    border:1px solid var(--line);
-    border-radius:10px;
-    background:transparent;
-    cursor:pointer;
-  }
-  /* hamburger icon (3 bars) */
-  .menu-toggle::before{
-    content:"";
-    position:absolute;
-    left:11px; right:11px; top:14px;
-    height:2px; background:var(--ink);
-    box-shadow: 0 6px 0 0 var(--ink), 0 12px 0 0 var(--ink);
-  }
+    .menu-toggle {
+        display: block;
+    }
 
-  /* Hide links by default on small screens, keep brand visible */
-  .nav{gap:14px}
-  .nav > a{ display:none; }
-  .nav .brand{ display:flex; align-items:center; }
+    /* Hide links by default on small screens, keep brand visible */
+    .nav {
+        gap: 14px;
+    }
+    .nav > a {
+        display: none;
+    }
+    .nav .brand {
+        display: flex;
+        align-items: center;
+    }
 
-  /* When open, turn nav into a dropdown below the header */
-  body.menu-open .nav{
-    position:absolute;
-    top:100%; left:0; right:0;
-    background:color-mix(in oklab, var(--canvas) 96%, transparent);
-    backdrop-filter:saturate(120%) blur(10px);
-    border-bottom:1px solid color-mix(in oklab, var(--line) 70%, transparent);
-    padding:12px 16px 16px;
-    display:flex; flex-direction:column; align-items:flex-start;
-    gap:8px; z-index:19;
-  }
-  body.menu-open .nav > a{
-    display:flex;
-    background:var(--card);
-    padding:10px 12px;
-    border-radius:8px;
-  }
+    /* When open, create dropdown background that extends to cover all links */
+    body.menu-open .header-inner::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        height: 180px; /* Enough to cover all 4 links */
+        background: color-mix(in oklab, var(--canvas) 96%, transparent);
+        backdrop-filter: saturate(120%) blur(10px);
+        border-bottom: 1px solid
+            color-mix(in oklab, var(--line) 70%, transparent);
+        z-index: 98;
+    }
+
+    /* Position nav links absolutely on top of the background */
+    body.menu-open .nav {
+        position: static;
+    }
+
+    body.menu-open .nav > a {
+        position: absolute;
+        display: block;
+        background: transparent;
+        padding: 10px 12px;
+        left: 16px;
+        right: 16px;
+        z-index: 99;
+    }
+
+    /* Stack the links vertically */
+    body.menu-open .nav > a:nth-of-type(1) {
+        top: calc(100% + 12px);
+    }
+    body.menu-open .nav > a:nth-of-type(2) {
+        top: calc(100% + 52px);
+    }
+    body.menu-open .nav > a:nth-of-type(3) {
+        top: calc(100% + 92px);
+    }
+    body.menu-open .nav > a:nth-of-type(4) {
+        top: calc(100% + 132px);
+    }
+
+    /* Ensure brand stays visible in header when menu is open */
+    body.menu-open .nav .brand {
+        display: flex;
+        position: relative;
+        z-index: 101;
+    }
+
+    /* === INDEX PAGE SPECIFIC === */
+    /* When menu opens on index, fill header and dropdown with dark background */
+    body.menu-open .header.overlay {
+        background: rgba(11, 18, 32, 0.96);
+        backdrop-filter: saturate(120%) blur(10px);
+        border-bottom: 1px solid #1f2a3b;
+    }
+
+    /* Index page dropdown background: dark */
+    body.menu-open .header.overlay .header-inner::after {
+        background: rgba(11, 18, 32, 0.96);
+        border-bottom: 1px solid #1f2a3b;
+    }
+
+    /* Index page: menu text always white */
+    body.menu-open .header.overlay .nav > a {
+        color: #ffffff;
+        text-shadow: none;
+    }
+    body.menu-open .header.overlay .nav > a:hover,
+    body.menu-open .header.overlay .nav > a.active {
+        color: var(--accent);
+    }
+
+    /* Other pages: hamburger follows theme */
+    .header:not(.overlay) .menu-toggle::before {
+        background: var(--ink);
+        box-shadow:
+            0 6px 0 0 var(--ink),
+            0 12px 0 0 var(--ink);
+    }
 }
 
-
-
-/* Robust visibility toggles */
-@media (max-width:760px){
-  .header .nav > a{ display:none !important; }
-  body.menu-open .header .nav > a{ display:flex !important; }
+/* Desktop: ensure nav links are clickable */
+@media (min-width: 761px) {
+    .nav > a {
+        display: inline-block;
+        position: relative;
+        z-index: 10;
+    }
 }
-
-
-/* Ensure hamburger icon follows theme ink on all pages/sizes */
-.menu-toggle{ color: var(--ink); }
-.menu-toggle::before{
-  background: currentColor;
-  box-shadow: 0 6px 0 0 currentColor, 0 12px 0 0 currentColor;
-}
-
-
-/* Force correct theme for the mobile dropdown, including Home */
-@media (max-width:760px){
-  html[data-theme="dark"] body.menu-open .nav{
-    background: rgba(11,18,32,0.96) !important; /* --canvas @ ~96% */
-    border-bottom:1px solid #1F2A3B !important;  /* --line */
-  }
-  html[data-theme="dark"] body.menu-open .nav > a{
-    background:#111827 !important; /* --card */
-    color:#EAF0F6 !important;       /* --ink */
-  }
-  html[data-theme="dark"] .menu-toggle{ color:#EAF0F6 !important; }
-  html[data-theme="dark"] .menu-toggle::before{
-    background: currentColor !important;
-    box-shadow: 0 6px 0 0 currentColor, 0 12px 0 0 currentColor !important;
-  }
-}
-
-
-
-/* Do not style the brand icon like a menu item in mobile dropdown */
-@media (max-width:760px){
-  body.menu-open .nav .brand a{
-    background: transparent !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-  }
-}
-
-
-
-/* Remove border/box around hamburger button; rely on icon bars only */
-.menu-toggle{
-  border: none !important;
-  background: transparent !important;
-  outline: none;
-}
-.menu-toggle:focus-visible{
-  outline: 2px solid color-mix(in oklab, var(--ink) 40%, transparent);
-  outline-offset: 2px;
-}
-

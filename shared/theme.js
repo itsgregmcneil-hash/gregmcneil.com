@@ -1,32 +1,49 @@
 // Shared theme controller (v7) - Auto system-follow on pages without a manual toggle
-(function(){
+(function () {
   const STORAGE_KEY = "gm-theme";
 
   function getSystemPref() {
     try {
-      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    } catch(e){ return "light"; }
+      return window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    } catch (e) {
+      return "light";
+    }
   }
 
-  function shouldFreezeIcons(){
+  function shouldFreezeIcons() {
     const html = document.documentElement;
     const body = document.body;
-    return html.hasAttribute("data-fixed-icons") || (body && body.classList.contains("fixed-icons"));
+    return (
+      html.hasAttribute("data-fixed-icons") ||
+      (body && body.classList.contains("fixed-icons"))
+    );
   }
 
-  function swapIconsForTheme(theme){
+  function swapIconsForTheme(theme) {
     if (shouldFreezeIcons()) return; // Home/index stays constant
     const iconMap = {
-      instagram: { light: "./assets/InstagramBlack.png", dark: "./assets/InstagramWhite.webp" },
-      linkedin:  { light: "./assets/LinkedInBlack.png",  dark: "./assets/LinkedInWhite.webp"  },
-      youtube:   { light: "./assets/YouTubeBlack.png",   dark: "./assets/YouTubeWhite.webp"   }
+      instagram: {
+        light: "./assets/InstagramBlack.png",
+        dark: "./assets/InstagramWhite.webp",
+      },
+      linkedin: {
+        light: "./assets/LinkedInBlack.png",
+        dark: "./assets/LinkedInWhite.webp",
+      },
+      youtube: {
+        light: "./assets/YouTubeBlack.png",
+        dark: "./assets/YouTubeWhite.webp",
+      },
     };
-    document.querySelectorAll("img[data-icon]").forEach(img => {
+    document.querySelectorAll("img[data-icon]").forEach((img) => {
       const key = (img.getAttribute("data-icon") || "").toLowerCase();
       const set = iconMap[key];
-      if(set){
+      if (set) {
         const desired = set[theme];
-        if(desired && img.getAttribute("src") !== desired){
+        if (desired && img.getAttribute("src") !== desired) {
           img.setAttribute("src", desired);
         }
       }
@@ -38,11 +55,11 @@
     swapIconsForTheme(theme);
   }
 
-  function currentTheme(){
+  function currentTheme() {
     return localStorage.getItem(STORAGE_KEY) || getSystemPref();
   }
 
-  function toggleTheme(){
+  function toggleTheme() {
     const next = currentTheme() === "dark" ? "light" : "dark";
     localStorage.setItem(STORAGE_KEY, next);
     applyTheme(next);
@@ -52,7 +69,9 @@
     const hasManualToggle = !!document.querySelector(".theme-toggle");
 
     if (!hasManualToggle) {
-      try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (e) {}
       const applySystem = () => applyTheme(getSystemPref());
       applySystem();
 
@@ -65,25 +84,20 @@
 
       const mql = window.matchMedia("(prefers-color-scheme: dark)");
       const handleChange = () => {
-        if(!localStorage.getItem(STORAGE_KEY)){
+        if (!localStorage.getItem(STORAGE_KEY)) {
           applyTheme(getSystemPref());
         }
       };
       if (mql.addEventListener) mql.addEventListener("change", handleChange);
       else if (mql.addListener) mql.addListener(handleChange);
 
-      document.querySelectorAll(".theme-toggle").forEach(btn => {
+      document.querySelectorAll(".theme-toggle").forEach((btn) => {
         btn.addEventListener("click", toggleTheme);
-        btn.setAttribute("aria-pressed", currentTheme() === "dark" ? "true" : "false");
+        btn.setAttribute(
+          "aria-pressed",
+          currentTheme() === "dark" ? "true" : "false",
+        );
       });
     }
-
-    // --- Mobile menu toggle ---
-    document.querySelectorAll('.menu-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const open = document.body.classList.toggle('menu-open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-    });
   });
 })();

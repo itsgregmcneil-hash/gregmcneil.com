@@ -1,310 +1,746 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Projects — Greg McNeil</title>
-<link href="./shared/header.css" rel="stylesheet"/>
-<style>
-    :root{--accent:#6CBEF1; --ink:#EAF0F6; --muted:#B7C3D3; --canvas:#0B1220; --card:#111827; --line:#1F2A3B;}
-    @media (prefers-color-scheme: light){
-      :root{--ink:#101318; --muted:#4A5565; --canvas:#F7FAFE; --card:#FFFFFF; --line:#E5ECF4;}
-    }
-    body{margin:0; font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:var(--ink); background:var(--canvas); line-height:1.55;}
-  </style>
-<style id="projects-styles">
-    main{max-width:1200px;margin:0 auto;padding:32px 24px}
-    .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-    .filters button{
-      padding:8px 12px;border-radius:999px;border:1px solid var(--line);
-      background:var(--card);color:var(--ink);cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;
-    }
-    .filters button:hover{transform:translateY(-1px); box-shadow:0 2px 8px rgba(0,0,0,.08)}
-    .filters button.active{
-      background:color-mix(in oklab, var(--accent) 22%, var(--card));
-      border-color:color-mix(in oklab,var(--accent) 50%, var(--line));
-    }
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
-    .card{
-      background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
-      box-shadow:0 1px 3px rgba(0,0,0,.06); transform:translateY(0); transition:transform .16s ease, box-shadow .16s ease;
-    }
-    .card:hover{ transform:translateY(-4px); box-shadow:0 8px 24px rgba(0,0,0,.14) }
-    .thumb{width:100%;aspect-ratio:4/3;object-fit:cover;display:block; transition:transform .25s ease}
-    .card:hover .thumb{ transform:scale(1.02) }
-    .meta{padding:12px 14px}
-    .title{font-size:16px;line-height:1.3;margin:0 0 4px 0}
-    .year{font-size:13px;color:var(--muted)}
-    .category-chip{
-      display:inline-flex;align-items:center;font-size:12px;padding:4px 8px;border-radius:999px;
-      background:color-mix(in oklab, var(--accent) 14%, transparent);
-      border:1px solid color-mix(in oklab, var(--accent) 35%, transparent);
-      color: var(--chip-ink);
-    }
-    .meta-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-    .attachment{color:var(--ink); text-decoration:underline}
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <title>Projects — Greg McNeil</title>
+        <link href="./shared/header.css" rel="stylesheet" />
+        <style>
+            :root {
+                --accent: #6cbef1;
+                --ink: #eaf0f6;
+                --muted: #b7c3d3;
+                --canvas: #0b1220;
+                --card: #111827;
+                --line: #1f2a3b;
+            }
+            @media (prefers-color-scheme: light) {
+                :root {
+                    --ink: #101318;
+                    --muted: #4a5565;
+                    --canvas: #f7fafe;
+                    --card: #ffffff;
+                    --line: #e5ecf4;
+                }
+            }
+            body {
+                margin: 0;
+                font-family:
+                    ui-sans-serif,
+                    system-ui,
+                    -apple-system,
+                    Segoe UI,
+                    Roboto,
+                    Helvetica,
+                    Arial;
+                color: var(--ink);
+                background: var(--canvas);
+                line-height: 1.55;
+            }
+        </style>
+        <style id="projects-styles">
+            main {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 32px 24px;
+            }
+            .filters {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+                margin-bottom: 20px;
+            }
+            .filters button {
+                padding: 8px 12px;
+                border-radius: 999px;
+                border: 1px solid var(--line);
+                background: var(--card);
+                color: var(--ink);
+                cursor: pointer;
+                transition:
+                    transform 0.15s ease,
+                    box-shadow 0.15s ease;
+            }
+            .filters button:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            }
+            .filters button.active {
+                background: color-mix(in oklab, var(--accent) 22%, var(--card));
+                border-color: color-mix(
+                    in oklab,
+                    var(--accent) 50%,
+                    var(--line)
+                );
+            }
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 18px;
+            }
+            .card {
+                background: var(--card);
+                border: 1px solid var(--line);
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+                transform: translateY(0);
+                transition:
+                    transform 0.16s ease,
+                    box-shadow 0.16s ease;
+            }
+            .card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+            }
+            .thumb {
+                width: 100%;
+                aspect-ratio: 4/3;
+                object-fit: cover;
+                display: block;
+                transition: transform 0.25s ease;
+            }
+            .card:hover .thumb {
+                transform: scale(1.02);
+            }
+            .meta {
+                padding: 12px 14px;
+            }
+            .title {
+                font-size: 16px;
+                line-height: 1.3;
+                margin: 0 0 4px 0;
+            }
+            .year {
+                font-size: 13px;
+                color: var(--muted);
+            }
+            .category-chip {
+                display: inline-flex;
+                align-items: center;
+                font-size: 12px;
+                padding: 4px 8px;
+                border-radius: 999px;
+                background: color-mix(in oklab, var(--accent) 14%, transparent);
+                border: 1px solid
+                    color-mix(in oklab, var(--accent) 35%, transparent);
+                color: var(--chip-ink);
+            }
+            .meta-top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 8px;
+            }
+            .attachment {
+                color: var(--ink);
+                text-decoration: underline;
+            }
 
-    /* Modal */
-    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:60}
-    .modal-backdrop.show{display:flex}
-    .modal{width:min(860px,90vw);max-height:80vh;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:auto}
-    .modal header{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:center;justify-content:space-between}
-    .modal .body{padding:18px}
-    .x{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;padding:6px 10px;cursor:pointer}
-    a.attachment{display:inline-block;margin-right:10px;margin-top:6px}
-  
-a.media-link{color:var(--ink); text-decoration:underline;}
-.filters{justify-content:flex-end;}
-</style>
-<script defer="" src="./shared/pagefx.js"></script>
-<script defer="" src="./shared/scrollhide.js"></script>
-<script defer="" src="./shared/theme.js"></script>
-<script defer="" src="./shared/nav.js"></script>
-</head>
-<body class="fade-in">
-<header class="header">
-<div class="header-inner">
-<nav aria-label="Primary" class="nav" id="primary-nav">
-<div class="brand"><a href="./index.html"><img alt="GM icon" src="./assets/icon.avif"/></a></div>
-<a href="./index.html">Home</a>
-<a href="./about.html">About</a>
-<a href="./career.html">Career</a>
-<a class="active" href="./projects.html">Projects</a>
-</nav>
-      <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Menu" onclick="(function(){var b=document.body;var open=b.classList.toggle('menu-open');var btn=document.getElementById('menu-toggle');if(btn) btn.setAttribute('aria-expanded', open ? 'true':'false');})();"></button>
-</div>
-</header>
-<main>
-<div aria-label="Project filters" class="filters" id="filters" role="tablist">
-<button aria-selected="true" class="active" data-cat="All" role="tab">All</button>
-<button aria-selected="false" data-cat="Engineering" role="tab">Engineering</button>
-<button aria-selected="false" data-cat="Music" role="tab">Music</button>
-<button aria-selected="false" data-cat="Video" role="tab">Video</button>
-</div>
-<div aria-live="polite" class="grid" id="grid"></div>
-</main>
-<div aria-hidden="true" class="modal-backdrop" id="backdrop">
-<div aria-labelledby="m-title" aria-modal="true" class="modal" role="dialog">
-<header>
-<div>
-<div class="title" id="m-title" style="font-size:18px;font-weight:600"></div>
-<div class="year" id="m-sub"></div>
-</div>
-<button aria-label="Close" class="x" id="m-close">Close</button>
-</header>
-<div class="body">
-<img alt="" id="m-img" style="width:100%;height:auto;border-radius:10px;display:none;margin-bottom:12px"/>
-<p id="m-desc" style="margin-top:0"></p>
-<div id="m-attachments"></div>
-</div>
-</div>
-</div>
-<script>
-    const IMAGES = {
-      "Beauty and the Beast Set Design": "./assets/engineering/beauty-and-the-beast.avif",
-      "Eagle Project (Garden of Life)": "./assets/engineering/eagle-project.avif",
-      "Wedding Singer Set Design": "./assets/engineering/wedding-singer-set.avif",
-      "Legally Blonde Set Design": "./assets/engineering/legally-blonde-set.avif",
-      "Self-Navigating Robot": "./assets/engineering/self-navigating-robot.avif",
-      "HEMS": "./assets/engineering/hems.avif",
-      "Chess Set": "./assets/engineering/chess-set.avif",
-      "Truss Design": "./assets/engineering/truss-design.avif",
-      "Liquid Cooled Computer": "./assets/engineering/liquid-cooled-computer.avif",
-      "Barcade": "./assets/engineering/barcade.avif",
-      "Modularity": "./assets/engineering/modularity.avif",
-      "Infinity Bar": "./assets/engineering/infinity-bar.avif",
-      "M3F1": "./assets/engineering/m3f1.avif",
-      "Senior Thesis": "./assets/engineering/senior-thesis.avif",
-      "Ariel Spectrum Mapping": "./assets/engineering/ariel-spectrum-mapping.avif",
-      "Building a Winning Baseball Team": "./assets/engineering/building-a-winning-baseball-team.avif",
-      "Analysis of Trump’s Twitter": "./assets/engineering/analysis-of-trumps-twitter.avif",
-      "PacMan": "./assets/engineering/pacman.avif",
-      "Sunset Overdrive – Planet Legato": "./assets/music/sunset-overdrive.avif",
-      "Tokyo Speedway – Planet Legato": "./assets/music/tokyo-speedway.avif",
-      "Bombay – Planet Legato": "./assets/music/bombay.avif",
-      "Thesis Jams – Madison Street": "./assets/music/thesis-jams.avif",
-      "PANACEA – In The Works": "./assets/music/panacea.avif",
-      "LOADING EP – In The Works": "./assets/music/loading.avif",
-      "DOWNTOWN – In The Works": "./assets/music/downtown.avif",
-      "Roland SPD-SX // Overview, Unboxing, and Demo": "./assets/video/spd-sx-overview.jpg",
-      "Roland SPD-SX // Basic Sampling Tutorial (Beginner)": "./assets/video/spd-sx-basic-sampling.jpg",
-      "Roland SPD-SX // MultiPad Sampling Tutorial (Beginner)": "./assets/video/spd-sx-multipad-sampling.jpg",
-      "We Built a Good Noodle Chart // Engineering Animated": "./assets/video/we-built-a-good-noodle-chart.jpg",
-      "Lenovo Accidental Damage Protection": "./assets/video/lenovo-adp.jpg"
-    };
+            /* Modal */
+            .modal-backdrop {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.5);
+                display: none;
+                align-items: center;
+                justify-content: center;
+                z-index: 60;
+            }
+            .modal-backdrop.show {
+                display: flex;
+            }
+            .modal {
+                width: min(860px, 90vw);
+                max-height: 80vh;
+                background: var(--card);
+                border: 1px solid var(--line);
+                border-radius: 16px;
+                overflow: auto;
+            }
+            .modal header {
+                padding: 16px 18px;
+                border-bottom: 1px solid var(--line);
+                display: flex;
+                gap: 12px;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .modal .body {
+                padding: 18px;
+            }
+            .x {
+                border: 1px solid var(--line);
+                background: var(--card);
+                color: var(--ink);
+                border-radius: 10px;
+                padding: 6px 10px;
+                cursor: pointer;
+            }
+            a.attachment {
+                display: inline-block;
+                margin-right: 10px;
+                margin-top: 6px;
+            }
 
-    const DATA = {items: [
-      {"title": "Beauty and the Beast Set Design", "year": 2011, "category": "Engineering", "desc": "A detailed stage design project featuring structural blueprints modeled in SketchUp to balance visual artistry with build feasibility.", "attachments": []},
-      {"title": "Eagle Project (Garden of Life)", "year": 2011, "category": "Engineering", "desc": "An outdoor educational garden designed to teach ecological systems through live demonstrations of energy, water, and plant cycles.", "attachments": []},
-      {"title": "Wedding Singer Set Design", "year": 2012, "category": "Engineering", "desc": "A digital set modeling effort focused on translating physical mock-ups into precise construction blueprints for a high school musical.", "attachments": []},
-      {"title": "Legally Blonde Set Design", "year": 2013, "category": "Engineering", "desc": "A SketchUp-based production design showcasing structural planning and visual coordination for large-scale stage performance.", "attachments": []},
-      {"title": "Self-Navigating Robot", "year": 2013, "category": "Engineering", "desc": "A robotics project featuring an autonomous competition robot integrating mechanical sensors, real-time programming, and navigation logic.", "attachments": [["Written Report.pdf", "./Written%20Report.pdf"]]},
-      {"title": "HEMS", "year": 2013, "category": "Engineering", "desc": "A hazardous-gas monitoring system integrating chemical sensors and motion-triggered tamper alarms for early leak detection.", "attachments": []},
-      {"title": "Chess Set", "year": 2013, "category": "Engineering", "desc": "A 32-piece chess collection modeled in SolidWorks emphasizing geometric precision and additive-manufacturing readiness.", "attachments": []},
-      {"title": "Truss Design", "year": 2014, "category": "Engineering", "desc": "A structural engineering project testing a brass truss design against theoretical and real-world load conditions using applied mechanics.", "attachments": [["D3Project1Report-Final-11-6-14.pdf", "./D3Project1Report-Final-11-6-14.pdf"]]},
-      {"title": "Liquid Cooled Computer", "year": 2014, "category": "Engineering", "desc": "A custom high-performance desktop computer incorporating a fully liquid-cooled loop for thermal efficiency and visual appeal.", "attachments": []},
-      {"title": "Barcade", "year": 2015, "category": "Engineering", "desc": "A conceptual design for a full-scale arcade cabinet integrating emulator software, joystick controls, and lumber-based construction.", "attachments": []},
-      {"title": "Modularity", "year": 2015, "category": "Engineering", "desc": "A modular smart power strip concept emphasizing stackable outlets, USB integration, and customizable configurations for users.", "attachments": []},
-      {"title": "Infinity Bar", "year": 2016, "category": "Engineering", "desc": "A custom lighting installation utilizing infinity-mirror optics and embedded electronics to create an endless-depth visual effect.", "attachments": []},
-      {"title": "M3F1", "year": 2017, "category": "Engineering", "desc": "A robotic pet prototype inspired by R2-D2, featuring multi-sensor interaction, Arduino control, and custom 3D-printed housing.", "attachments": [["Final Project Report ME 322.pdf", "./Final%20Project%20Report%20ME%20322.pdf"]]},
-      {"title": "Senior Thesis", "year": 2018, "category": "Engineering", "desc": "A systems engineering capstone exploring data-driven methodologies to guide proof-of-concept development and market alignment.", "attachments": [["SYS800-Final.pdf", "./SYS800-Final.pdf"]]},
-      {"title": "Ariel Spectrum Mapping", "year": 2018, "category": "Engineering", "desc": "A UAV-mounted radio-frequency mapping system developed with General Dynamics to identify and optimize unused spectrum space.", "attachments": [["Final Report.pdf", "./Final%20Report.pdf"]]},
-      {"title": "Building a Winning Baseball Team", "year": 2018, "category": "Engineering", "desc": "A statistical analysis of MLB team performance exploring payroll, offensive metrics, and player efficiency as predictors of championships.", "attachments": [["EM-622 Final Project.pdf", "./EM-622%20Final%20Project.pdf"]]},
-      {"title": "Analysis of Trump’s Twitter", "year": 2018, "category": "Engineering", "desc": "A data analysis project evaluating correlations between presidential tweets, media sentiment, and financial market response.", "attachments": [["Presidential Effects on the News Media.pptx", "./Presidential%20Effects%20on%20the%20News%20Media.pptx"]]},
-      {"title": "PacMan", "year": 2009, "category": "Engineering", "desc": "A full-scale, wearable Pac-Man model constructed for interactive exhibitions, combining CAD design with large-format fabrication.", "attachments": []},
+            a.media-link {
+                color: var(--ink);
+                text-decoration: underline;
+            }
+            .filters {
+                justify-content: flex-end;
+            }
+        </style>
+        <script defer="" src="./shared/pagefx.js"></script>
+        <script defer="" src="./shared/scrollhide.js"></script>
+        <script defer="" src="./shared/theme.js"></script>
+    </head>
+    <body class="fade-in">
+        <header class="header">
+            <div class="header-inner">
+                <nav aria-label="Primary" class="nav" id="primary-nav">
+                    <div class="brand">
+                        <a href="./index.html"
+                            ><img alt="GM icon" src="./assets/icon.avif"
+                        /></a>
+                    </div>
+                    <a href="./index.html">Home</a>
+                    <a href="./about.html">About</a>
+                    <a href="./career.html">Career</a>
+                    <a class="active" href="./projects.html">Projects</a>
+                </nav>
+                <button
+                    class="menu-toggle"
+                    type="button"
+                    id="menu-toggle"
+                    aria-expanded="false"
+                    aria-controls="primary-nav"
+                    aria-label="Menu"
+                ></button>
+            </div>
+        </header>
+        <main>
+            <div
+                aria-label="Project filters"
+                class="filters"
+                id="filters"
+                role="tablist"
+            >
+                <button
+                    aria-selected="true"
+                    class="active"
+                    data-cat="All"
+                    role="tab"
+                >
+                    All
+                </button>
+                <button aria-selected="false" data-cat="Engineering" role="tab">
+                    Engineering
+                </button>
+                <button aria-selected="false" data-cat="Music" role="tab">
+                    Music
+                </button>
+                <button aria-selected="false" data-cat="Video" role="tab">
+                    Video
+                </button>
+            </div>
+            <div aria-live="polite" class="grid" id="grid"></div>
+        </main>
+        <div aria-hidden="true" class="modal-backdrop" id="backdrop">
+            <div
+                aria-labelledby="m-title"
+                aria-modal="true"
+                class="modal"
+                role="dialog"
+            >
+                <header>
+                    <div>
+                        <div
+                            class="title"
+                            id="m-title"
+                            style="font-size: 18px; font-weight: 600"
+                        ></div>
+                        <div class="year" id="m-sub"></div>
+                    </div>
+                    <button aria-label="Close" class="x" id="m-close">
+                        Close
+                    </button>
+                </header>
+                <div class="body">
+                    <img
+                        alt=""
+                        id="m-img"
+                        style="
+                            width: 100%;
+                            height: auto;
+                            border-radius: 10px;
+                            display: none;
+                            margin-bottom: 12px;
+                        "
+                    />
+                    <p id="m-desc" style="margin-top: 0"></p>
+                    <div id="m-attachments"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+            const IMAGES = {
+                "Beauty and the Beast Set Design":
+                    "./assets/engineering/beauty-and-the-beast.avif",
+                "Eagle Project (Garden of Life)":
+                    "./assets/engineering/eagle-project.avif",
+                "Wedding Singer Set Design":
+                    "./assets/engineering/wedding-singer-set.avif",
+                "Legally Blonde Set Design":
+                    "./assets/engineering/legally-blonde-set.avif",
+                "Self-Navigating Robot":
+                    "./assets/engineering/self-navigating-robot.avif",
+                HEMS: "./assets/engineering/hems.avif",
+                "Chess Set": "./assets/engineering/chess-set.avif",
+                "Truss Design": "./assets/engineering/truss-design.avif",
+                "Liquid Cooled Computer":
+                    "./assets/engineering/liquid-cooled-computer.avif",
+                Barcade: "./assets/engineering/barcade.avif",
+                Modularity: "./assets/engineering/modularity.avif",
+                "Infinity Bar": "./assets/engineering/infinity-bar.avif",
+                M3F1: "./assets/engineering/m3f1.avif",
+                "Senior Thesis": "./assets/engineering/senior-thesis.avif",
+                "Ariel Spectrum Mapping":
+                    "./assets/engineering/ariel-spectrum-mapping.avif",
+                "Building a Winning Baseball Team":
+                    "./assets/engineering/building-a-winning-baseball-team.avif",
+                "Analysis of Trump's Twitter":
+                    "./assets/engineering/analysis-of-trumps-twitter.avif",
+                PacMan: "./assets/engineering/pacman.avif",
+                "Sunset Overdrive – Planet Legato":
+                    "./assets/music/sunset-overdrive.avif",
+                "Tokyo Speedway – Planet Legato":
+                    "./assets/music/tokyo-speedway.avif",
+                "Bombay – Planet Legato": "./assets/music/bombay.avif",
+                "Thesis Jams – Madison Street":
+                    "./assets/music/thesis-jams.avif",
+                "PANACEA – In The Works": "./assets/music/panacea.avif",
+                "LOADING EP – In The Works": "./assets/music/loading.avif",
+                "DOWNTOWN – In The Works": "./assets/music/downtown.avif",
+                "Roland SPD-SX // Overview, Unboxing, and Demo":
+                    "./assets/video/spd-sx-overview.jpg",
+                "Roland SPD-SX // Basic Sampling Tutorial (Beginner)":
+                    "./assets/video/spd-sx-basic-sampling.jpg",
+                "Roland SPD-SX // MultiPad Sampling Tutorial (Beginner)":
+                    "./assets/video/spd-sx-multipad-sampling.jpg",
+                "We Built a Good Noodle Chart // Engineering Animated":
+                    "./assets/video/we-built-a-good-noodle-chart.jpg",
+                "Lenovo Accidental Damage Protection":
+                    "./assets/video/lenovo-adp.jpg",
+            };
 
-      {"title": "Sunset Overdrive – Planet Legato", "year": 2020, "category": "Music", "desc": "<a href='https://soundcloud.com/planetlegato/sunset-overdrive' class='media-link' target='_blank'>Soundcloud Link</a>", "attachments": []},
-      {"title": "Tokyo Speedway – Planet Legato", "year": 2020, "category": "Music", "desc": "<a href='https://soundcloud.com/planetlegato/tokyo-speedway' class='media-link' target='_blank'>Soundcloud Link</a>", "attachments": []},
-      {"title": "Bombay – Planet Legato", "year": 2020, "category": "Music", "desc": "<a href='https://soundcloud.com/planetlegato/bombay' class='media-link' target='_blank'>Soundcloud Link</a>", "attachments": []},
-      {"title": "Thesis Jams – Madison Street", "year": 2019, "category": "Music", "desc": "<a href='https://soundcloud.com/user-740677064/sets/madison-street' class='media-link' target='_blank'>Soundcloud Link</a>", "attachments": []},
-      {"title": "PANACEA – In The Works", "year": 2018, "category": "Music", "desc": "<a href='https://soundcloud.com/in-the-works-music/sets/panacea' class='media-link' target='_blank'>Soundcloud Link</a>", "attachments": []},
-      {"title": "LOADING EP – In The Works", "year": 2017, "category": "Music", "desc": "<a href='https://soundcloud.com/in-the-works-music/sets/loading-ep' class='media-link' target='_blank'>Soundcloud Link</a>", "attachments": []},
-      {"title": "DOWNTOWN – In The Works", "year": 2017, "category": "Music", "desc": "<a href='https://soundcloud.com/in-the-works-music/downtown' class='media-link' target='_blank'>Soundcloud Link</a>", "attachments": []},
+            const DATA = {
+                items: [
+                    {
+                        title: "Beauty and the Beast Set Design",
+                        year: 2011,
+                        category: "Engineering",
+                        desc: "A detailed stage design project featuring structural blueprints modeled in SketchUp to balance visual artistry with build feasibility.",
+                        attachments: [],
+                    },
+                    {
+                        title: "Eagle Project (Garden of Life)",
+                        year: 2011,
+                        category: "Engineering",
+                        desc: "An outdoor educational garden designed to teach ecological systems through live demonstrations of energy, water, and plant cycles.",
+                        attachments: [],
+                    },
+                    {
+                        title: "Wedding Singer Set Design",
+                        year: 2012,
+                        category: "Engineering",
+                        desc: "A digital set modeling effort focused on translating physical mock-ups into precise construction blueprints for a high school musical.",
+                        attachments: [],
+                    },
+                    {
+                        title: "Legally Blonde Set Design",
+                        year: 2013,
+                        category: "Engineering",
+                        desc: "A SketchUp-based production design showcasing structural planning and visual coordination for large-scale stage performance.",
+                        attachments: [],
+                    },
+                    {
+                        title: "Self-Navigating Robot",
+                        year: 2013,
+                        category: "Engineering",
+                        desc: "A robotics project featuring an autonomous competition robot integrating mechanical sensors, real-time programming, and navigation logic.",
+                        attachments: [
+                            ["Written Report.pdf", "./Written%20Report.pdf"],
+                        ],
+                    },
+                    {
+                        title: "HEMS",
+                        year: 2013,
+                        category: "Engineering",
+                        desc: "A hazardous-gas monitoring system integrating chemical sensors and motion-triggered tamper alarms for early leak detection.",
+                        attachments: [],
+                    },
+                    {
+                        title: "Chess Set",
+                        year: 2013,
+                        category: "Engineering",
+                        desc: "A 32-piece chess collection modeled in SolidWorks emphasizing geometric precision and additive-manufacturing readiness.",
+                        attachments: [],
+                    },
+                    {
+                        title: "Truss Design",
+                        year: 2014,
+                        category: "Engineering",
+                        desc: "A structural engineering project testing a brass truss design against theoretical and real-world load conditions using applied mechanics.",
+                        attachments: [
+                            [
+                                "D3Project1Report-Final-11-6-14.pdf",
+                                "./D3Project1Report-Final-11-6-14.pdf",
+                            ],
+                        ],
+                    },
+                    {
+                        title: "Liquid Cooled Computer",
+                        year: 2014,
+                        category: "Engineering",
+                        desc: "A custom high-performance desktop computer incorporating a fully liquid-cooled loop for thermal efficiency and visual appeal.",
+                        attachments: [],
+                    },
+                    {
+                        title: "Barcade",
+                        year: 2015,
+                        category: "Engineering",
+                        desc: "A conceptual design for a full-scale arcade cabinet integrating emulator software, joystick controls, and lumber-based construction.",
+                        attachments: [],
+                    },
+                    {
+                        title: "Modularity",
+                        year: 2015,
+                        category: "Engineering",
+                        desc: "A modular smart power strip concept emphasizing stackable outlets, USB integration, and customizable configurations for users.",
+                        attachments: [],
+                    },
+                    {
+                        title: "Infinity Bar",
+                        year: 2016,
+                        category: "Engineering",
+                        desc: "A custom lighting installation utilizing infinity-mirror optics and embedded electronics to create an endless-depth visual effect.",
+                        attachments: [],
+                    },
+                    {
+                        title: "M3F1",
+                        year: 2017,
+                        category: "Engineering",
+                        desc: "A robotic pet prototype inspired by R2-D2, featuring multi-sensor interaction, Arduino control, and custom 3D-printed housing.",
+                        attachments: [
+                            [
+                                "Final Project Report ME 322.pdf",
+                                "./Final%20Project%20Report%20ME%20322.pdf",
+                            ],
+                        ],
+                    },
+                    {
+                        title: "Senior Thesis",
+                        year: 2018,
+                        category: "Engineering",
+                        desc: "A systems engineering capstone exploring data-driven methodologies to guide proof-of-concept development and market alignment.",
+                        attachments: [
+                            ["SYS800-Final.pdf", "./SYS800-Final.pdf"],
+                        ],
+                    },
+                    {
+                        title: "Ariel Spectrum Mapping",
+                        year: 2018,
+                        category: "Engineering",
+                        desc: "A UAV-mounted radio-frequency mapping system developed with General Dynamics to identify and optimize unused spectrum space.",
+                        attachments: [
+                            ["Final Report.pdf", "./Final%20Report.pdf"],
+                        ],
+                    },
+                    {
+                        title: "Building a Winning Baseball Team",
+                        year: 2018,
+                        category: "Engineering",
+                        desc: "A statistical analysis of MLB team performance exploring payroll, offensive metrics, and player efficiency as predictors of championships.",
+                        attachments: [
+                            [
+                                "EM-622 Final Project.pdf",
+                                "./EM-622%20Final%20Project.pdf",
+                            ],
+                        ],
+                    },
+                    {
+                        title: "Analysis of Trump's Twitter",
+                        year: 2018,
+                        category: "Engineering",
+                        desc: "A data analysis project evaluating correlations between presidential tweets, media sentiment, and financial market response.",
+                        attachments: [
+                            [
+                                "Presidential Effects on the News Media.pptx",
+                                "./Presidential%20Effects%20on%20the%20News%20Media.pptx",
+                            ],
+                        ],
+                    },
+                    {
+                        title: "PacMan",
+                        year: 2009,
+                        category: "Engineering",
+                        desc: "A full-scale, wearable Pac-Man model constructed for interactive exhibitions, combining CAD design with large-format fabrication.",
+                        attachments: [],
+                    },
 
-      {"title": "Roland SPD-SX // Overview, Unboxing, and Demo", "year": 2020, "category": "Video", "desc": "<a href='https://youtu.be/XWE9UsXN2c8?si=1tG_Ao2S6_14cpou' class='media-link' target='_blank'>YouTube Link</a>", "attachments": []},
-      {"title": "Roland SPD-SX // Basic Sampling Tutorial (Beginner)", "year": 2020, "category": "Video", "desc": "<a href='https://youtu.be/h_I-RFVwAGM?si=Nuz0UKD44gWhs89N' class='media-link' target='_blank'>YouTube Link</a>", "attachments": []},
-      {"title": "Roland SPD-SX // MultiPad Sampling Tutorial (Beginner)", "year": 2020, "category": "Video", "desc": "<a href='https://youtu.be/SJwLvEan74g?si=ub2n9Rn_h_UOy5Pw' class='media-link' target='_blank'>YouTube Link</a>", "attachments": []},
-      {"title": "We Built a Good Noodle Chart // Engineering Animated", "year": 2021, "category": "Video", "desc": "<a href='https://youtu.be/SH0c7Sz-ZF0?si=dcdzJp8MeL_XWi4H' class='media-link' target='_blank'>YouTube Link</a>", "attachments": []},
-      {"title": "Lenovo Accidental Damage Protection", "year": 2024, "category": "Video", "desc": "<a href='https://www.youtube.com/watch?v=QO5w_GlU6eU' class='media-link' target='_blank'>YouTube Link</a>", "attachments": []}
-    ]};
+                    {
+                        title: "Sunset Overdrive – Planet Legato",
+                        year: 2020,
+                        category: "Music",
+                        desc: "<a href='https://soundcloud.com/planetlegato/sunset-overdrive' class='media-link' target='_blank'>Soundcloud Link</a>",
+                        attachments: [],
+                    },
+                    {
+                        title: "Tokyo Speedway – Planet Legato",
+                        year: 2020,
+                        category: "Music",
+                        desc: "<a href='https://soundcloud.com/planetlegato/tokyo-speedway' class='media-link' target='_blank'>Soundcloud Link</a>",
+                        attachments: [],
+                    },
+                    {
+                        title: "Bombay – Planet Legato",
+                        year: 2020,
+                        category: "Music",
+                        desc: "<a href='https://soundcloud.com/planetlegato/bombay' class='media-link' target='_blank'>Soundcloud Link</a>",
+                        attachments: [],
+                    },
+                    {
+                        title: "Thesis Jams – Madison Street",
+                        year: 2019,
+                        category: "Music",
+                        desc: "<a href='https://soundcloud.com/user-740677064/sets/madison-street' class='media-link' target='_blank'>Soundcloud Link</a>",
+                        attachments: [],
+                    },
+                    {
+                        title: "PANACEA – In The Works",
+                        year: 2018,
+                        category: "Music",
+                        desc: "<a href='https://soundcloud.com/in-the-works-music/sets/panacea' class='media-link' target='_blank'>Soundcloud Link</a>",
+                        attachments: [],
+                    },
+                    {
+                        title: "LOADING EP – In The Works",
+                        year: 2017,
+                        category: "Music",
+                        desc: "<a href='https://soundcloud.com/in-the-works-music/sets/loading-ep' class='media-link' target='_blank'>Soundcloud Link</a>",
+                        attachments: [],
+                    },
+                    {
+                        title: "DOWNTOWN – In The Works",
+                        year: 2017,
+                        category: "Music",
+                        desc: "<a href='https://soundcloud.com/in-the-works-music/downtown' class='media-link' target='_blank'>Soundcloud Link</a>",
+                        attachments: [],
+                    },
 
-    const PLACEHOLDERS = {
-      Engineering: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDgwJz48ZGVmcz48cGF0dGVybiBpZD0ncCcgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBwYXR0ZXJuVW5pdHM9J3VzZXJTcGFjZU9uVXNlJyBwYXR0ZXJuVHJhbnNmb3JtPSdyb3RhdGUoNDUpJz48cmVjdCB3aWR0aD0nMTAnIGhlaWdodD0nMTAnIGZpbGw9JyMzREQ2RDAnLz48cmVjdCB3aWR0aD0nNicgaGVpZ2h0PSc2JyBmaWxsPSd3aGl0ZScgb3BhY2l0eT0nLjA2Jy8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0nMTAwJSUnIGhlaWdodD0nMTAwJSUnIGZpbGw9J3VybCgjcCknLz48dGV4dCB4PScyNCcgeT0nNDQwJyBmaWxsPSd3aGl0ZScgZm9udC1zaXplPScyOCcgZm9udC1mYW1pbHk9J0hlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWYnIG9wYWNpdHk9Jy45Jz5FbmdpbmVlcmluZzwvdGV4dD48L3N2Zz4=",
-      Music: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDgwJz48ZGVmcz48cGF0dGVybiBpZD0ncCcgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBwYXR0ZXJuVW5pdHM9J3VzZXJTcGFjZU9uVXNlJyBwYXR0ZXJuVHJhbnNmb3JtPSdyb3RhdGUoNDUpJz48cmVjdCB3aWR0aD0nMTAnIGhlaWdodD0nMTAnIGZpbGw9JyMyRTJFMkUnLz48cmVjdCB3aWR0aD0nNicgaGVpZ2h0PSc2JyBmaWxsPSd3aGl0ZScgb3BhY2l0eT0nLjA2Jy8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0nMTAwJSUnIGhlaWdodD0nMTAwJSUnIGZpbGw9J3VybCgjcCknLz48dGV4dCB4PScyNCcgeT0nNDQwJyBmaWxsPSd3aGl0ZScgZm9udC1zaXplPScyOCcgZm9udC1mYW1pbHk9J0hlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWYnIG9wYWNpdHk9Jy45Jz5NdXNpYzwvdGV4dD48L3N2Zz4=",
-      Video: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDgwJz48ZGVmcz48cGF0dGVybiBpZD0ncCcgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBwYXR0ZXJuVW5pdHM9J3VzZXJTcGFjZU9uVXNlJyBwYXR0ZXJuVHJhbnNmb3JtPSdyb3RhdGUoNDUpJz48cmVjdCB3aWR0aD0nMTAnIGhlaWdodD0nMTAnIGZpbGw9JyNCRkJGQkYnLz48cmVjdCB3aWR0aD0nNicgaGVpZ2h0PSc2JyBmaWxsPSd3aGl0ZScgb3BhY2l0eT0nLjA2Jy8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0nMTAwJSUnIGhlaWdodD0nMTAwJSUnIGZpbGw9J3VybCgjcCknLz48dGV4dCB4PScyNCcgeT0nNDQwJyBmaWxsPSd3aGl0ZScgZm9udC1zaXplPScyOCcgZm9udC1mYW1pbHk9J0hlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWYnIG9wYWNpdHk9Jy45Jz5WaWRlbzwvdGV4dD48L3N2Zz4=",
-      Other: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDgwJz48ZGVmcz48cGF0dGVybiBpZD0ncCcgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBwYXR0ZXJuVW5pdHM9J3VzZXJTcGFjZU9uVXNlJyBwYXR0ZXJuVHJhbnNmb3JtPSdyb3RhdGUoNDUpJz48cmVjdCB3aWR0aD0nMTAnIGhlaWdodD0nMTAnIGZpbGw9JyMzQTJCNDInLz48cmVjdCB3aWR0aD0nNicgaGVpZ2h0PSc2JyBmaWxsPSd3aGl0ZScgb3BhY2l0eT0nLjA2Jy8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0nMTAwJSUnIGhlaWdodD0nMTAwJSUnIGZpbGw9J3VybCgjcCknLz48dGV4dCB4PScyNCcgeT0nNDQwJyBmaWxsPSd3aGl0ZScgZm9udC1zaXplPScyOCcgZm9udC1mYW1pbHk9J0hlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWYnIG9wYWNpdHk9Jy45Jz5PdGhlcjwvdGV4dD48L3N2Zz4=",
-    };
+                    {
+                        title: "Roland SPD-SX // Overview, Unboxing, and Demo",
+                        year: 2020,
+                        category: "Video",
+                        desc: "<a href='https://youtu.be/XWE9UsXN2c8?si=1tG_Ao2S6_14cpou' class='media-link' target='_blank'>YouTube Link</a>",
+                        attachments: [],
+                    },
+                    {
+                        title: "Roland SPD-SX // Basic Sampling Tutorial (Beginner)",
+                        year: 2020,
+                        category: "Video",
+                        desc: "<a href='https://youtu.be/h_I-RFVwAGM?si=Nuz0UKD44gWhs89N' class='media-link' target='_blank'>YouTube Link</a>",
+                        attachments: [],
+                    },
+                    {
+                        title: "Roland SPD-SX // MultiPad Sampling Tutorial (Beginner)",
+                        year: 2020,
+                        category: "Video",
+                        desc: "<a href='https://youtu.be/SJwLvEan74g?si=ub2n9Rn_h_UOy5Pw' class='media-link' target='_blank'>YouTube Link</a>",
+                        attachments: [],
+                    },
+                    {
+                        title: "We Built a Good Noodle Chart // Engineering Animated",
+                        year: 2021,
+                        category: "Video",
+                        desc: "<a href='https://youtu.be/SH0c7Sz-ZF0?si=dcdzJp8MeL_XWi4H' class='media-link' target='_blank'>YouTube Link</a>",
+                        attachments: [],
+                    },
+                    {
+                        title: "Lenovo Accidental Damage Protection",
+                        year: 2024,
+                        category: "Video",
+                        desc: "<a href='https://www.youtube.com/watch?v=QO5w_GlU6eU' class='media-link' target='_blank'>YouTube Link</a>",
+                        attachments: [],
+                    },
+                ],
+            };
 
-    const grid = document.getElementById('grid');
-    const filters = document.getElementById('filters');
-    const backdrop = document.getElementById('backdrop');
-    const mTitle = document.getElementById('m-title');
-    const mSub = document.getElementById('m-sub');
-    const mDesc = document.getElementById('m-desc');
-    const mAtt = document.getElementById('m-attachments');
-    const mClose = document.getElementById('m-close');
+            const PLACEHOLDERS = {
+                Engineering:
+                    "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDgwJz48ZGVmcz48cGF0dGVybiBpZD0ncCcgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBwYXR0ZXJuVW5pdHM9J3VzZXJTcGFjZU9uVXNlJyBwYXR0ZXJuVHJhbnNmb3JtPSdyb3RhdGUoNDUpJz48cmVjdCB3aWR0aD0nMTAnIGhlaWdodD0nMTAnIGZpbGw9JyMzREQ2RDAnLz48cmVjdCB3aWR0aD0nNicgaGVpZ2h0PSc2JyBmaWxsPSd3aGl0ZScgb3BhY2l0eT0nLjA2Jy8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0nMTAwJSUnIGhlaWdodD0nMTAwJSUnIGZpbGw9J3VybCgjcCknLz48dGV4dCB4PScyNCcgeT0nNDQwJyBmaWxsPSd3aGl0ZScgZm9udC1zaXplPScyOCcgZm9udC1mYW1pbHk9J0hlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWYnIG9wYWNpdHk9Jy45Jz5FbmdpbmVlcmluZzwvdGV4dD48L3N2Zz4=",
+                Music: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDgwJz48ZGVmcz48cGF0dGVybiBpZD0ncCcgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBwYXR0ZXJuVW5pdHM9J3VzZXJTcGFjZU9uVXNlJyBwYXR0ZXJuVHJhbnNmb3JtPSdyb3RhdGUoNDUpJz48cmVjdCB3aWR0aD0nMTAnIGhlaWdodD0nMTAnIGZpbGw9JyMyRTJFMkUnLz48cmVjdCB3aWR0aD0nNicgaGVpZ2h0PSc2JyBmaWxsPSd3aGl0ZScgb3BhY2l0eT0nLjA2Jy8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0nMTAwJSUnIGhlaWdodD0nMTAwJSUnIGZpbGw9J3VybCgjcCknLz48dGV4dCB4PScyNCcgeT0nNDQwJyBmaWxsPSd3aGl0ZScgZm9udC1zaXplPScyOCcgZm9udC1mYW1pbHk9J0hlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWYnIG9wYWNpdHk9Jy45Jz5NdXNpYzwvdGV4dD48L3N2Zz4=",
+                Video: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDgwJz48ZGVmcz48cGF0dGVybiBpZD0ncCcgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBwYXR0ZXJuVW5pdHM9J3VzZXJTcGFjZU9uVXNlJyBwYXR0ZXJuVHJhbnNmb3JtPSdyb3RhdGUoNDUpJz48cmVjdCB3aWR0aD0nMTAnIGhlaWdodD0nMTAnIGZpbGw9JyNCRkJGQkYnLz48cmVjdCB3aWR0aD0nNicgaGVpZ2h0PSc2JyBmaWxsPSd3aGl0ZScgb3BhY2l0eT0nLjA2Jy8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0nMTAwJSUnIGhlaWdodD0nMTAwJSUnIGZpbGw9J3VybCgjcCknLz48dGV4dCB4PScyNCcgeT0nNDQwJyBmaWxsPSd3aGl0ZScgZm9udC1zaXplPScyOCcgZm9udC1mYW1pbHk9J0hlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWYnIG9wYWNpdHk9Jy45Jz5WaWRlbzwvdGV4dD48L3N2Zz4=",
+                Other: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NDAnIGhlaWdodD0nNDgwJz48ZGVmcz48cGF0dGVybiBpZD0ncCcgd2lkdGg9JzEwJyBoZWlnaHQ9JzEwJyBwYXR0ZXJuVW5pdHM9J3VzZXJTcGFjZU9uVXNlJyBwYXR0ZXJuVHJhbnNmb3JtPSdyb3RhdGUoNDUpJz48cmVjdCB3aWR0aD0nMTAnIGhlaWdodD0nMTAnIGZpbGw9JyMzQTJCNDInLz48cmVjdCB3aWR0aD0nNicgaGVpZ2h0PSc2JyBmaWxsPSd3aGl0ZScgb3BhY2l0eT0nLjA2Jy8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0nMTAwJSUnIGhlaWdodD0nMTAwJSUnIGZpbGw9J3VybCgjcCknLz48dGV4dCB4PScyNCcgeT0nNDQwJyBmaWxsPSd3aGl0ZScgZm9udC1zaXplPScyOCcgZm9udC1mYW1pbHk9J0hlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWYnIG9wYWNpdHk9Jy45Jz5PdGhlcjwvdGV4dD48L3N2Zz4=",
+            };
 
-    let currentCat = "All";
+            const grid = document.getElementById("grid");
+            const filters = document.getElementById("filters");
+            const backdrop = document.getElementById("backdrop");
+            const mTitle = document.getElementById("m-title");
+            const mSub = document.getElementById("m-sub");
+            const mDesc = document.getElementById("m-desc");
+            const mAtt = document.getElementById("m-attachments");
+            const mClose = document.getElementById("m-close");
 
-    function card(item){
-      const img = document.createElement('img');
-      img.className = 'thumb';
-      const src = IMAGES[item.title] || (PLACEHOLDERS[item.category] || PLACEHOLDERS.Other);
-      img.src = src;
-      img.alt = item.title + " thumbnail";
+            let currentCat = "All";
 
-      const meta = document.createElement('div');
-      meta.className = 'meta';
-      const metaTop = document.createElement('div');
-      metaTop.className = 'meta-top';
+            function card(item) {
+                const img = document.createElement("img");
+                img.className = "thumb";
+                const src =
+                    IMAGES[item.title] ||
+                    PLACEHOLDERS[item.category] ||
+                    PLACEHOLDERS.Other;
+                img.src = src;
+                img.alt = item.title + " thumbnail";
 
-      const chip = document.createElement('span');
-      chip.className = 'category-chip';
-      chip.textContent = item.category;
+                const meta = document.createElement("div");
+                meta.className = "meta";
+                const metaTop = document.createElement("div");
+                metaTop.className = "meta-top";
 
-      const year = document.createElement('div');
-      year.className = 'year';
-      year.textContent = item.year;
+                const chip = document.createElement("span");
+                chip.className = "category-chip";
+                chip.textContent = item.category;
 
-      metaTop.appendChild(chip);
-      metaTop.appendChild(year);
+                const year = document.createElement("div");
+                year.className = "year";
+                year.textContent = item.year;
 
-      const title = document.createElement('h3');
-      title.className = 'title';
-      title.textContent = item.title;
+                metaTop.appendChild(chip);
+                metaTop.appendChild(year);
 
-      meta.appendChild(metaTop);
-      meta.appendChild(title);
+                const title = document.createElement("h3");
+                title.className = "title";
+                title.textContent = item.title;
 
-      const el = document.createElement('article');
-      el.className = 'card';
-      el.appendChild(img);
-      el.appendChild(meta);
+                meta.appendChild(metaTop);
+                meta.appendChild(title);
 
-      el.addEventListener('click', () => openModal(item));
-      return el;
-    }
+                const el = document.createElement("article");
+                el.className = "card";
+                el.appendChild(img);
+                el.appendChild(meta);
 
-    function render(){
-      grid.innerHTML = "";
-      const items = DATA.items.slice().sort((a,b)=>b.year - a.year);
-      items.filter(it => currentCat === "All" || it.category === currentCat)
-           .forEach(it => grid.appendChild(card(it)));
-    }
+                el.addEventListener("click", () => openModal(item));
+                return el;
+            }
 
-    filters.addEventListener('click', (e) => {
-      const btn = e.target.closest('button[data-cat]');
-      if(!btn) return;
-      filters.querySelectorAll('button').forEach(b => {b.classList.remove('active'); b.setAttribute('aria-selected', 'false');});
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-      currentCat = btn.dataset.cat;
-      render();
-    });
+            function render() {
+                grid.innerHTML = "";
+                const items = DATA.items
+                    .slice()
+                    .sort((a, b) => b.year - a.year);
+                items
+                    .filter(
+                        (it) =>
+                            currentCat === "All" || it.category === currentCat,
+                    )
+                    .forEach((it) => grid.appendChild(card(it)));
+            }
 
-    function openModal(item){
-      const mImg = document.getElementById('m-img');
-      const src = IMAGES[item.title] || (PLACEHOLDERS[item.category] || PLACEHOLDERS.Other);
-      if(mImg){ mImg.src = src; mImg.alt = item.title; mImg.style.display = 'block'; }
-      mTitle.textContent = item.title;
-      mSub.textContent = item.category + " · " + item.year;
-      mDesc.innerHTML = item.desc;
-      mAtt.innerHTML = "";
-      if(Array.isArray(item.attachments)){
-        item.attachments.forEach(([label, href]) => {
-          const a = document.createElement('a');
-          a.href = href;
-          a.textContent = label;
-          a.className = 'attachment';
-          a.target = "_blank";
-          a.rel = "noopener noreferrer";
-          mAtt.appendChild(a);
-        });
-      }
-      backdrop.classList.add('show');
-      backdrop.setAttribute('aria-hidden', 'false');
-    }
+            filters.addEventListener("click", (e) => {
+                const btn = e.target.closest("button[data-cat]");
+                if (!btn) return;
+                filters.querySelectorAll("button").forEach((b) => {
+                    b.classList.remove("active");
+                    b.setAttribute("aria-selected", "false");
+                });
+                btn.classList.add("active");
+                btn.setAttribute("aria-selected", "true");
+                currentCat = btn.dataset.cat;
+                render();
+            });
 
-    function closeModal(){
-      backdrop.classList.remove('show');
-      backdrop.setAttribute('aria-hidden', 'true');
-    }
+            function openModal(item) {
+                const mImg = document.getElementById("m-img");
+                const src =
+                    IMAGES[item.title] ||
+                    PLACEHOLDERS[item.category] ||
+                    PLACEHOLDERS.Other;
+                if (mImg) {
+                    mImg.src = src;
+                    mImg.alt = item.title;
+                    mImg.style.display = "block";
+                }
+                mTitle.textContent = item.title;
+                mSub.textContent = item.category + " · " + item.year;
+                mDesc.innerHTML = item.desc;
+                mAtt.innerHTML = "";
+                if (Array.isArray(item.attachments)) {
+                    item.attachments.forEach(([label, href]) => {
+                        const a = document.createElement("a");
+                        a.href = href;
+                        a.textContent = label;
+                        a.className = "attachment";
+                        a.target = "_blank";
+                        a.rel = "noopener noreferrer";
+                        mAtt.appendChild(a);
+                    });
+                }
+                backdrop.classList.add("show");
+                backdrop.setAttribute("aria-hidden", "false");
+            }
 
-    backdrop.addEventListener('click', (e)=>{
-      if(e.target === backdrop) closeModal();
-    });
-    mClose.addEventListener('click', closeModal);
-    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+            function closeModal() {
+                backdrop.classList.remove("show");
+                backdrop.setAttribute("aria-hidden", "true");
+            }
 
-    document.addEventListener('DOMContentLoaded', render);
-  </script>
+            backdrop.addEventListener("click", (e) => {
+                if (e.target === backdrop) closeModal();
+            });
+            mClose.addEventListener("click", closeModal);
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") closeModal();
+            });
 
-  <script>
-    /* hamburger js */
-    (function(){
-      var btn = document.getElementById('menu-toggle');
-      var nav = document.getElementById('primary-nav');
-      var body = document.body;
-      if(!btn || !nav) return;
+            document.addEventListener("DOMContentLoaded", render);
+        </script>
 
-      function closeMenu(){
-        body.classList.remove('menu-open');
-        btn.setAttribute('aria-expanded', 'false');
-      }
-      function toggleMenu(){
-        var open = body.classList.toggle('menu-open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      }
-      btn.addEventListener('click', toggleMenu);
-      nav.addEventListener('click', function(e){
-        if(e.target && e.target.tagName === 'A'){ closeMenu(); }
-      });
-      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
-      var mq = window.matchMedia('(max-width: 760px)');
-      window.addEventListener('resize', function(){ if(!mq.matches) closeMenu(); });
-    })();
-  </script>
+        <script>
+            /* hamburger js */
+            (function () {
+                var btn = document.getElementById("menu-toggle");
+                var nav = document.getElementById("primary-nav");
+                var body = document.body;
+                if (!btn || !nav) return;
 
-</body>
+                function closeMenu() {
+                    body.classList.remove("menu-open");
+                    btn.setAttribute("aria-expanded", "false");
+                }
+                function toggleMenu() {
+                    var open = body.classList.toggle("menu-open");
+                    btn.setAttribute("aria-expanded", open ? "true" : "false");
+                }
+                btn.addEventListener("click", toggleMenu);
+                nav.addEventListener("click", function (e) {
+                    if (e.target && e.target.tagName === "A") {
+                        closeMenu();
+                    }
+                });
+                document.addEventListener("keydown", function (e) {
+                    if (e.key === "Escape") closeMenu();
+                });
+                var mq = window.matchMedia("(max-width: 760px)");
+                window.addEventListener("resize", function () {
+                    if (!mq.matches) closeMenu();
+                });
+            })();
+        </script>
+    </body>
 </html>
