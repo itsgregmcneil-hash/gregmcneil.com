@@ -333,17 +333,7 @@
                                 had.
                             </figcaption>
                         </figure>
-                        <figure class="bio-figure">
-                            <img
-                                alt="Greg speaking at an event"
-                                loading="lazy"
-                                src="./assets/bio-speaking.png"
-                            />
-                            <figcaption>
-                                Got to talk about the differences between 7/11
-                                Japan and rest of world!
-                            </figcaption>
-                        </figure>
+                        <!-- SWAPPED ORDER STARTS HERE -->
                         <figure class="bio-figure">
                             <img
                                 alt="Greg playing drums on stage"
@@ -355,6 +345,18 @@
                                 decided to sit behind a drum kit.
                             </figcaption>
                         </figure>
+                        <figure class="bio-figure">
+                            <img
+                                alt="Greg speaking at an event"
+                                loading="lazy"
+                                src="./assets/bio-speaking.png"
+                            />
+                            <figcaption>
+                                Got to talk about the differences between 7/11
+                                Japan and rest of world!
+                            </figcaption>
+                        </figure>
+                        <!-- SWAPPED ORDER ENDS HERE -->
                     </div>
                 </div>
             </section>
@@ -439,20 +441,4 @@
                     var open = body.classList.toggle("menu-open");
                     btn.setAttribute("aria-expanded", open ? "true" : "false");
                 }
-                btn.addEventListener("click", toggleMenu);
-                nav.addEventListener("click", function (e) {
-                    if (e.target && e.target.tagName === "A") {
-                        closeMenu();
-                    }
-                });
-                document.addEventListener("keydown", function (e) {
-                    if (e.key === "Escape") closeMenu();
-                });
-                var mq = window.matchMedia("(max-width: 760px)");
-                window.addEventListener("resize", function () {
-                    if (!mq.matches) closeMenu();
-                });
-            })();
-        </script>
-    </body>
-</html>
+                btn.addEventListener("cl
