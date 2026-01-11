@@ -311,13 +311,34 @@
                 <div class="bio-card">
                     <div class="story">
                         <p>
-                           My earliest memories center on being fascinated by technology. I remember making short movies on an early iMac and being totally enthralled when we slowed down a clip from a point-and-shoot camera. My parents like to remind me that my favorite childhood toy was a box of wires, and that I insisted on bringing them to daycare. The curiosity started early, and it never left. I’ve always loved building useful things at the intersection of liberal arts and technology.
+                            My earliest memories center on being fascinated by
+                            technology. I remember making short movies on an
+                            early iMac and being totally enthralled when we
+                            slowed down a clip from a point-and-shoot camera. My
+                            parents like to remind me that my favorite childhood
+                            toy was a box of wires—and that I insisted on
+                            bringing them to daycare. The curiosity started
+                            early, and it never left. I’ve always loved building
+                            useful things at the intersection of liberal arts
+                            and technology.
                         </p>
                         <p>
-                            Over time, that curiosity became a career connecting engineering, design, and business. I’ve always viewed creativity and systems thinking as two sides of the same coin, one shaping imagination and the other giving it purpose. I love when an idea moves from a whiteboard sketch to something people can actually use.
+                            Over time, that curiosity became a career connecting
+                            engineering, design, and business. I’ve always
+                            viewed creativity and systems thinking as two sides
+                            of the same coin—one shaping imagination, the other
+                            giving it purpose. I love when an idea moves from a
+                            whiteboard sketch to something people can actually
+                            use.
                         </p>
                         <p>
-                           I’m happiest when I’m creating: designing a product or service, filming a video, playing music, or helping someone sharpen an idea. I enjoy contributing through mentorship, product development, and collaborations where ideas come to life. If you're working on something interesting, let’s talk.
+                            I’m happiest when I’m creating—designing a product
+                            or service, filming a video, playing music, or
+                            helping someone sharpen an idea. I enjoy
+                            contributing through mentorship, product
+                            development, and collaborations where ideas come to
+                            life. If you're working on something interesting,
+                            let’s talk.
                         </p>
                     </div>
                     <div class="bio-gallery">
@@ -333,18 +354,6 @@
                                 had.
                             </figcaption>
                         </figure>
-                        <!-- SWAPPED ORDER STARTS HERE -->
-                        <figure class="bio-figure">
-                            <img
-                                alt="Greg playing drums on stage"
-                                loading="lazy"
-                                src="./assets/bio-drums.png"
-                            />
-                            <figcaption>
-                                I’m endlessly grateful that 10-year-old me
-                                decided to sit behind a drum kit.
-                            </figcaption>
-                        </figure>
                         <figure class="bio-figure">
                             <img
                                 alt="Greg speaking at an event"
@@ -356,7 +365,17 @@
                                 Japan and rest of world!
                             </figcaption>
                         </figure>
-                        <!-- SWAPPED ORDER ENDS HERE -->
+                        <figure class="bio-figure">
+                            <img
+                                alt="Greg playing drums on stage"
+                                loading="lazy"
+                                src="./assets/bio-drums.png"
+                            />
+                            <figcaption>
+                                I’m endlessly grateful that 10-year-old me
+                                decided to sit behind a drum kit.
+                            </figcaption>
+                        </figure>
                     </div>
                 </div>
             </section>
@@ -376,8 +395,7 @@
             </section>
             <section class="section">
                 <div class="foot">
-                    <a class="download" href="mailto:itsgregmcneil@gmail.com"
-                        >✉ Email Me</a
+                    <a class="download" href="/cdn-cgi/l/email-protection#0e677a7d697c6b69636d606b67624e69636f6762206d6163">✉ Email Me</a
                     >
                     <div aria-label="Social links" class="social">
                         <a
@@ -425,7 +443,7 @@
             </section>
         </div>
 
-        <script>
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
             /* hamburger js */
             (function () {
                 var btn = document.getElementById("menu-toggle");
@@ -441,4 +459,20 @@
                     var open = body.classList.toggle("menu-open");
                     btn.setAttribute("aria-expanded", open ? "true" : "false");
                 }
-                btn.addEventListener("cl
+                btn.addEventListener("click", toggleMenu);
+                nav.addEventListener("click", function (e) {
+                    if (e.target && e.target.tagName === "A") {
+                        closeMenu();
+                    }
+                });
+                document.addEventListener("keydown", function (e) {
+                    if (e.key === "Escape") closeMenu();
+                });
+                var mq = window.matchMedia("(max-width: 760px)");
+                window.addEventListener("resize", function () {
+                    if (!mq.matches) closeMenu();
+                });
+            })();
+        </script>
+    </body>
+</html>
